@@ -13,7 +13,7 @@ code {
     monospace;
 }
 
-.card {
+.memo-card {
   width: 10em;
   height: 10em;
   margin: 0.5em;
@@ -23,4 +23,8 @@ code {
 
 .board {
   background-color: #cdcdcd;
+}
+
+.card-hidden {
+  visibility: hidden;
 }
