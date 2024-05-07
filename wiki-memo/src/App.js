@@ -32,33 +32,24 @@ function countCardsFlipped(arr) {
 
 function App() {
 
-  const cardStack = suffleCardStack(duplicateCardStack(cardData))
+  const cardStack = duplicateCardStack(cardData)
+  //const cardStack = suffleCardStack(duplicateCardStack(cardData))
   const [cards, setCards] = useState(cardStack)
-  const numCardsFlipped = countCardsFlipped(cards)
+  const cardsFlipped = cards.filter((d)=> {return d.position === "faceUp"})
+  const numCardsFlipped = cardsFlipped.length
+  //const numCardsFlipped = countCardsFlipped(cards)
+  const [gamePhase, setGamePhase] = useState("flipping") // setup, flipping, pair, end
 
   if (numCardsFlipped === 2) {
-
-    const cardsFlipped = cards.filter((d)=> {return d.position === "faceUp"})
-
     if (cardsFlipped[0].pair === cardsFlipped[1].pair) {
-      console.log("Pair!")
-      const pairRemoved = cards.map((d)=> {
-        if (d.position === "faceUp") {
-          return {...d, onBoard: false, position: "faceDown"}
-        } else {
-          return d
-        }
-      })
-      setTimeout(()=>setCards(pairRemoved),1000) 
+      setTimeout(()=>setGamePhase("pair"),100) 
     } else {
-    
       const allCardsDown = cards.map((d) => {return {...d, position: "faceDown"}})
       setTimeout(()=>setCards(allCardsDown),1000) 
     }
   }
   
   const flipCard = (id) => {
-
     const newCards = cards.slice().map((d) => {
       if (d.id === id) {
         return {...d, position: "faceUp"}
@@ -66,9 +57,19 @@ function App() {
         return d
       }
     })
+    setCards(newCards)  
+  }
 
-    setCards(newCards)
-    
+  const removePair = () => {
+    const pairRemoved = cards.map((d)=> {
+      if (d.position === "faceUp") {
+        return {...d, onBoard: false, position: "faceDown"}
+      } else {
+        return d
+      }
+    })
+    setCards(pairRemoved)
+    setGamePhase("flipping")
   }
 
   const cardItems = cards.map(d => {
@@ -84,6 +85,9 @@ function App() {
 
   return (
     <>
+      {gamePhase === "pair" &&
+        <InfoOnPair handleRemovePair={()=>removePair()} flippedCard={cardsFlipped[0]}/>      
+      }
       <Board>
         {cardItems}
       </Board>
@@ -109,6 +113,25 @@ function Card({position, id, title, handleFlip, onBoard}) {
           <img className="w-100" src={image} alt={title} />
         </div>
       }
+    </div>
+  )
+}
+
+function InfoOnPair({handleRemovePair, flippedCard}) {
+  return (
+    <div id="card-infobox-container" className="row d-flex justify-content-center align-items-center" onClick={handleRemovePair}>
+      <div id="card-infobox" className="row w-75 h-50 bg-light p-3 rounded-2 overflow-auto">
+        <h1>Pair!</h1>
+        <div className="">
+          <img src={flippedCard.image} className="float-md-start m-3"></img>
+          <div className="">
+              <h3 id="card-title">{flippedCard.title}</h3>
+              <div id="card-description">{flippedCard.description} 
+                <span className="ms-1"><a href={flippedCard.link} target="_blank" rel="noreferrer">Read more</a></span>
+              </div>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }
