@@ -14,7 +14,7 @@ function duplicateCardStack(arr) {
 
 }
 
-function suffleCardStack(array) { //https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+function shuffleCardStack(array) { //https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
   for (var i = array.length - 1; i > 0; i--) {
       var j = Math.floor(Math.random() * (i + 1));
       var temp = array[i];
@@ -25,19 +25,13 @@ function suffleCardStack(array) { //https://stackoverflow.com/questions/2450954/
   return array
 }
 
-function countCardsFlipped(arr) {
-  let cardsFlipped = arr.filter((d)=>{return d.position==="faceUp"})
-  return cardsFlipped.length
-}
-
 function App() {
 
   const cardStack = duplicateCardStack(cardData)
-  //const cardStack = suffleCardStack(duplicateCardStack(cardData))
+  //const cardStack = shuffleCardStack(duplicateCardStack(cardData))
   const [cards, setCards] = useState(cardStack)
   const cardsFlipped = cards.filter((d)=> {return d.position === "faceUp"})
   const numCardsFlipped = cardsFlipped.length
-  //const numCardsFlipped = countCardsFlipped(cards)
   const [gamePhase, setGamePhase] = useState("flipping") // setup, flipping, pair, end
 
   if (numCardsFlipped === 2) {
@@ -97,9 +91,11 @@ function App() {
 
 function Board({children}) {
   return (
-    <div className="board vw-75 min-vh-100">
-        {children}
-    </div>
+  <div className="board-wrapper d-flex justify-content-center">
+        <div className="board">
+            {children}
+        </div>
+  </div>
   )
 }
 
