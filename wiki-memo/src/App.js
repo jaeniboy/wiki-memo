@@ -109,11 +109,9 @@ function Card({position, id, title, handleFlip, onBoard, image}) {
   const img = "https://picsum.photos/id/" + id*40 + "/200"
   return (
     <div className={"memo-card "  + (onBoard === false ? "card-hidden" : null)} onClick={handleFlip}>
-      {position === "faceUp" &&
-        <div style={{backgroundImage: `url("${image}")`}}>
-          {/* <img className="w-100" src={image} alt={title} /> */}
+        <div style={{backgroundImage: `url("${image}")`}} className={"card-front " + (position !== "faceUp" && "hidden")}>
         </div>
-      }
+        <div className={"card-back " + (position === "faceUp" && "hidden")}></div>
     </div>
   )
 }

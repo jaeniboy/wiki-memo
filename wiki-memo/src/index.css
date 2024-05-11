@@ -23,13 +23,24 @@ code {
   max-height: var(--max-edge-length);
   margin: calc(var(--margin) / 2);
   float: left;
-  background-color: gray;
 }
 
-.memo-card > div {
+.memo-card div {
   height: 100%;
+  border-radius: 10px;
+  box-shadow: 2px 2px 3px;
   background-position: center center;
+}
+
+.card-front {
   background-size: cover;
+}
+
+.card-back {
+  background-color:aliceblue;
+  background-image: url("./wikipedia-logo.svg");
+  background-size: 90%;
+  background-repeat: no-repeat;
 }
 
 .board {
@@ -61,6 +72,6 @@ code {
   min-height: 0px;
 }
 
-/* .card-image {
-  width: 
-} */
+.hidden {
+  display: none;
+}
