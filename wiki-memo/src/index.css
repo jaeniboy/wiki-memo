@@ -26,6 +26,12 @@ code {
   background-color: gray;
 }
 
+.memo-card > div {
+  height: 100%;
+  background-position: center center;
+  background-size: cover;
+}
+
 .board {
   background-color: #cdcdcd;
   height: 100vh;
@@ -54,3 +60,7 @@ code {
   overflow-y: auto;
   min-height: 0px;
 }
+
+/* .card-image {
+  width: 
+} */

@@ -44,7 +44,7 @@ for num_cat, category in enumerate(d):
             except:
                 pass
 
-with open('full-data-good-articles.json', 'w', encoding='utf8') as json_file:
+with open('../src/full-data-good-articles.json', 'w', encoding='utf8') as json_file:
     json.dump(d, json_file, ensure_ascii=False)
 
 

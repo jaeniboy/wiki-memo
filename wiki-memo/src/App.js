@@ -1,5 +1,9 @@
-import { useState} from "react";
-import {cardData} from "./testdata.js";
+import {useState} from "react";
+//import {cardData} from "./testdata.js";
+import cardData from "./full-data-good-articles.json";
+
+const cardSelection = cardData[0].subcategories[0].subcat_articles.slice(1,13)
+console.log(cardSelection)
 
 function duplicateCardStack(arr) {
 
@@ -27,7 +31,7 @@ function shuffleCardStack(array) { //https://stackoverflow.com/questions/2450954
 
 function App() {
 
-  const cardStack = duplicateCardStack(cardData)
+  const cardStack = duplicateCardStack(cardSelection)
   //const cardStack = shuffleCardStack(duplicateCardStack(cardData))
   const [cards, setCards] = useState(cardStack)
   const cardsFlipped = cards.filter((d)=> {return d.position === "faceUp"})
@@ -74,6 +78,7 @@ function App() {
       title={d.title}
       onBoard={d.onBoard}
       handleFlip={()=> numCardsFlipped!==2 && flipCard(d.id)}
+      image={d.img_url}
       />
   })
 
@@ -99,14 +104,14 @@ function Board({children}) {
   )
 }
 
-function Card({position, id, title, handleFlip, onBoard}) {
+function Card({position, id, title, handleFlip, onBoard, image}) {
 
-  const image = "https://picsum.photos/id/" + id*40 + "/200"
+  const img = "https://picsum.photos/id/" + id*40 + "/200"
   return (
     <div className={"memo-card "  + (onBoard === false ? "card-hidden" : null)} onClick={handleFlip}>
       {position === "faceUp" &&
-        <div>
-          <img className="w-100" src={image} alt={title} />
+        <div style={{backgroundImage: `url("${image}")`}}>
+          {/* <img className="w-100" src={image} alt={title} /> */}
         </div>
       }
     </div>
@@ -114,16 +119,17 @@ function Card({position, id, title, handleFlip, onBoard}) {
 }
 
 function InfoOnPair({handleRemovePair, flippedCard}) {
+  const link = "https://de.wikipedia.org" + flippedCard.link
   return (
     <div id="card-infobox-container" className="row d-flex justify-content-center align-items-center" onClick={handleRemovePair}>
       <div id="card-infobox" className="row w-75 h-50 bg-light p-3 rounded-2 overflow-auto">
         <h1>Pair!</h1>
         <div className="">
-          <img src={flippedCard.image} className="float-md-start m-3"></img>
+          <img src={flippedCard.img_url} className="float-md-start m-3 card-image w-25"></img>
           <div className="">
               <h3 id="card-title">{flippedCard.title}</h3>
-              <div id="card-description">{flippedCard.description} 
-                <span className="ms-1"><a href={flippedCard.link} target="_blank" rel="noreferrer">Read more</a></span>
+              <div id="card-description">{flippedCard.summary} 
+                <span className="ms-1"><a href={link} target="_blank" rel="noreferrer">Read more</a></span>
               </div>
           </div>
         </div>
