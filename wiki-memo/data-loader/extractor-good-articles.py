@@ -15,6 +15,9 @@ data = []
 # Hauptkategorien finden
 categories = soup.findAll("span", {"class": "mw-headline"})
 
+subcat_increment = 1
+article_increment = 1
+
 for i, category in enumerate(categories):
 
     # Unterkategorien und zugeordnete Links finden
@@ -24,11 +27,13 @@ for i, category in enumerate(categories):
 
     for j, subcat_p in enumerate(subcats_p):
         subcat_obj = {}
-        subcat_obj["id"] = j+1
+        subcat_obj["id"] = subcat_increment
         subcat_obj["subcat_title"] = subcat_p.find("b").text.strip()[:-1]
         subcat_link_tags = subcat_p.findAll("a")
-        subcat_obj["subcat_articles"] = [{"id": k+1, "link":tag["href"],"title":tag.text.strip()} for k, tag in enumerate(subcat_link_tags)]
+        subcat_obj["subcat_articles"] = [{"id": article_increment+k, "link":tag["href"],"title":tag.text.strip()} for k, tag in enumerate(subcat_link_tags) if tag.text.strip() != ""]
         subcats.append(subcat_obj)
+        subcat_increment = subcat_increment + 1
+        article_increment = article_increment + len(subcat_obj["subcat_articles"])
 
     cat_obj = {
         "id": i+1,

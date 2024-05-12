@@ -1,49 +1,46 @@
 import {useState} from "react";
 import cardData from "./full-data-good-articles.json";
+//import cardData from "./av.json";
 
-// const cardSelection = cardData[0].subcategories[0].subcat_articles.slice(1,13)
-// const cardSelection = drawRandomCards(cardData[0].subcategories[0].subcat_articles)
+//To-Do: Bugfix /wiki/Seattle_Storm
+
 const cardSelection = drawRandomCards(cardData)
-console.log(cardSelection)
 
 function getRandIndex(arr) {
   return Math.floor(Math.random() * arr.length)
 }
 
 function drawRandomCards(cards) {
-  // if (cards.length >= 12) {
-    let drawnCards = []
-    let drawnUrls = []
-    while(drawnCards.length < 12) {
-      let card = {}
-      const randIndex = getRandIndex(cards)
-      if (cards[randIndex].hasOwnProperty("subcategories")) { // it's a category
 
-        const secondRand = getRandIndex(cards[randIndex].subcategories)
-        const randSubcat = cards[randIndex].subcategories[secondRand]
+  let drawnCards = []
+  let drawnUrls = []
+  while(drawnCards.length < 12) {
+    let card = {}
+    const randIndex = getRandIndex(cards)
+    if (cards[randIndex].hasOwnProperty("subcategories")) { // it's a category
 
-        const thirdRand = getRandIndex(randSubcat.subcat_articles)
-        card = randSubcat.subcat_articles[thirdRand]
+      const secondRand = getRandIndex(cards[randIndex].subcategories)
+      const randSubcat = cards[randIndex].subcategories[secondRand]
 
-      } else if (cards[randIndex].hasOwnProperty("subcat_articles")) { // it's a subcategory
-        
-        const secondRand = getRandIndex(cards[randIndex].subcat_articles)
-        card = cards[randIndex].subcat_articles[secondRand]
-        
-      } else { // it's a article
+      const thirdRand = getRandIndex(randSubcat.subcat_articles)
+      card = randSubcat.subcat_articles[thirdRand]
 
-        card = cards[randIndex]
-      }
+    } else if (cards[randIndex].hasOwnProperty("subcat_articles")) { // it's a subcategory
+      
+      const secondRand = getRandIndex(cards[randIndex].subcat_articles)
+      card = cards[randIndex].subcat_articles[secondRand]
+      
+    } else { // it's a article
 
-      if (!drawnUrls.includes(card.link)) {
-        drawnCards.push(card)
-        drawnUrls.push(card.link)
-      }
+      card = cards[randIndex]
     }
-    return drawnCards
-  // } else {
-  //   console.log("Not enough articles in subcategory. Please select another!")
-  // }
+
+    if (!drawnUrls.includes(card.link)) {
+      drawnCards.push(card)
+      drawnUrls.push(card.link)
+    }
+  }
+  return drawnCards
 }
 
 function duplicateCardStack(arr) {
@@ -57,20 +54,20 @@ function duplicateCardStack(arr) {
 
 }
 
-// function shuffleCardStack(array) { //https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
-//   for (var i = array.length - 1; i > 0; i--) {
-//       var j = Math.floor(Math.random() * (i + 1));
-//       var temp = array[i];
-//       array[i] = array[j];
-//       array[j] = temp;
-//   }
+function shuffleCardStack(array) { //https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+  for (var i = array.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var temp = array[i];
+      array[i] = array[j];
+      array[j] = temp;
+  }
 
-//   return array
-// }
+  return array
+}
 
 function App() {
 
-  const cardStack = duplicateCardStack(cardSelection)
+  const cardStack = shuffleCardStack(duplicateCardStack(cardSelection))
   //const cardStack = shuffleCardStack(duplicateCardStack(cardData))
   const [cards, setCards] = useState(cardStack)
   const cardsFlipped = cards.filter((d)=> {return d.position === "faceUp"})
