@@ -1,33 +1,72 @@
 import {useState} from "react";
-//import {cardData} from "./testdata.js";
 import cardData from "./full-data-good-articles.json";
 
-const cardSelection = cardData[0].subcategories[0].subcat_articles.slice(1,13)
+// const cardSelection = cardData[0].subcategories[0].subcat_articles.slice(1,13)
+// const cardSelection = drawRandomCards(cardData[0].subcategories[0].subcat_articles)
+const cardSelection = drawRandomCards(cardData)
 console.log(cardSelection)
+
+function getRandIndex(arr) {
+  return Math.floor(Math.random() * arr.length)
+}
+
+function drawRandomCards(cards) {
+  // if (cards.length >= 12) {
+    let drawnCards = []
+    let drawnUrls = []
+    while(drawnCards.length < 12) {
+      let card = {}
+      const randIndex = getRandIndex(cards)
+      if (cards[randIndex].hasOwnProperty("subcategories")) { // it's a category
+
+        const secondRand = getRandIndex(cards[randIndex].subcategories)
+        const randSubcat = cards[randIndex].subcategories[secondRand]
+
+        const thirdRand = getRandIndex(randSubcat.subcat_articles)
+        card = randSubcat.subcat_articles[thirdRand]
+
+      } else if (cards[randIndex].hasOwnProperty("subcat_articles")) { // it's a subcategory
+        
+        const secondRand = getRandIndex(cards[randIndex].subcat_articles)
+        card = cards[randIndex].subcat_articles[secondRand]
+        
+      } else { // it's a article
+
+        card = cards[randIndex]
+      }
+
+      if (!drawnUrls.includes(card.link)) {
+        drawnCards.push(card)
+        drawnUrls.push(card.link)
+      }
+    }
+    return drawnCards
+  // } else {
+  //   console.log("Not enough articles in subcategory. Please select another!")
+  // }
+}
 
 function duplicateCardStack(arr) {
 
   // Daten duplizieren und mit einer Pair-Referenz ausstatten
-
-  const numItems = arr.length
-  const initialArray = arr.map(d => {return {...d, pair:d.id, onBoard: true}})
-  const siblings = initialArray.slice().map(d => {return {...d,id: d.id + numItems}})
+  const initialArray = arr.map(d => {return {...d, pair:d.link, onBoard: true}})
+  const siblings = initialArray.slice().map(d => {return {...d,id: d.id + "-2"}})
   const newArray = initialArray.concat(siblings)
 
   return newArray
 
 }
 
-function shuffleCardStack(array) { //https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
-  for (var i = array.length - 1; i > 0; i--) {
-      var j = Math.floor(Math.random() * (i + 1));
-      var temp = array[i];
-      array[i] = array[j];
-      array[j] = temp;
-  }
+// function shuffleCardStack(array) { //https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+//   for (var i = array.length - 1; i > 0; i--) {
+//       var j = Math.floor(Math.random() * (i + 1));
+//       var temp = array[i];
+//       array[i] = array[j];
+//       array[j] = temp;
+//   }
 
-  return array
-}
+//   return array
+// }
 
 function App() {
 
@@ -106,7 +145,6 @@ function Board({children}) {
 
 function Card({position, id, title, handleFlip, onBoard, image}) {
 
-  const img = "https://picsum.photos/id/" + id*40 + "/200"
   return (
     <div className={"memo-card "  + (onBoard === false ? "card-hidden" : null)} onClick={handleFlip}>
         <div style={{backgroundImage: `url("${image}")`}} className={"card-front " + (position !== "faceUp" && "hidden")}>
@@ -123,7 +161,7 @@ function InfoOnPair({handleRemovePair, flippedCard}) {
       <div id="card-infobox" className="row w-75 h-50 bg-light p-3 rounded-2 overflow-auto">
         <h1>Pair!</h1>
         <div className="">
-          <img src={flippedCard.img_url} className="float-md-start m-3 card-image w-25"></img>
+          <img src={flippedCard.img_url} alt="" className="float-md-start m-3 card-image w-25"></img>
           <div className="">
               <h3 id="card-title">{flippedCard.title}</h3>
               <div id="card-description">{flippedCard.summary} 
