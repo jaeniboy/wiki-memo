@@ -1,5 +1,6 @@
 import {useState} from "react";
 import cardData from "./full-data-good-articles.json";
+import {Settings} from "./Settings.js"
 //import cardData from "./av.json";
 
 //To-Do: Bugfix /wiki/Seattle_Storm
@@ -72,7 +73,9 @@ function App() {
   const [cards, setCards] = useState(cardStack)
   const cardsFlipped = cards.filter((d)=> {return d.position === "faceUp"})
   const numCardsFlipped = cardsFlipped.length
-  const [gamePhase, setGamePhase] = useState("flipping") // setup, flipping, pair, end
+  const [gamePhase, setGamePhase] = useState("setup") // setup, flipping, pair, end
+
+  const startGame = () => {setGamePhase("flipping")}
 
   if (numCardsFlipped === 2) {
     if (cardsFlipped[0].pair === cardsFlipped[1].pair) {
@@ -120,12 +123,17 @@ function App() {
 
   return (
     <>
+      {gamePhase === "setup" &&
+        <Settings handleClick={startGame}/>      
+      }
       {gamePhase === "pair" &&
         <InfoOnPair handleRemovePair={()=>removePair()} flippedCard={cardsFlipped[0]}/>      
       }
-      <Board>
-        {cardItems}
-      </Board>
+      {gamePhase !== "setup" &&
+        <Board>
+          {cardItems}
+        </Board>
+      }
     </>
   );
 }
@@ -170,5 +178,6 @@ function InfoOnPair({handleRemovePair, flippedCard}) {
     </div>
   )
 }
+
 
 export default App;
