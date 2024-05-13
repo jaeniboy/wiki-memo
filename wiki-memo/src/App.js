@@ -84,6 +84,7 @@ function App() {
   }
   
   const flipCard = (id) => {
+    console.log(cards)
     const newCards = cards.slice().map((d) => {
       if (d.id === id) {
         return {...d, position: "faceUp"}
@@ -109,12 +110,8 @@ function App() {
   const cardItems = cards.map(d => {
     return <Card 
       key={d.id}
-      position={d.position} 
-      id={d.pair}
-      title={d.title}
-      onBoard={d.onBoard}
       handleFlip={()=> numCardsFlipped!==2 && flipCard(d.id)}
-      image={d.img_url}
+      data = {d}
       />
   })
 
@@ -140,13 +137,17 @@ function Board({children}) {
   )
 }
 
-function Card({position, id, title, handleFlip, onBoard, image}) {
-
+function Card({handleFlip, data}) {
+  console.log(data)
   return (
-    <div className={"memo-card "  + (onBoard === false ? "card-hidden" : null)} onClick={handleFlip}>
-        <div style={{backgroundImage: `url("${image}")`}} className={"card-front " + (position !== "faceUp" && "hidden")}>
+    <div 
+      className={"memo-card "  + (data.onBoard === false ? "card-hidden" : null)} 
+      onClick={handleFlip}>
+        <div 
+          style={{backgroundImage: `url("${data.img_url}")`}} 
+          className={"card-front " + (data.position !== "faceUp" && "hidden")}>
         </div>
-        <div className={"card-back " + (position === "faceUp" && "hidden")}></div>
+        <div className={"card-back " + (data.position === "faceUp" && "hidden")}></div>
     </div>
   )
 }
