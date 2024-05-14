@@ -5,14 +5,13 @@ import {Settings} from "./Settings.js"
 
 //To-Do: Bugfix /wiki/Seattle_Storm
 
-const cardSelection = drawRandomCards(cardData)
+//const cardSelection = drawRandomCards(cardData)
 
 function getRandIndex(arr) {
   return Math.floor(Math.random() * arr.length)
 }
 
 function drawRandomCards(cards) {
-
   let drawnCards = []
   let drawnUrls = []
   while(drawnCards.length < 12) {
@@ -45,14 +44,11 @@ function drawRandomCards(cards) {
 }
 
 function duplicateCardStack(arr) {
-
-  // Daten duplizieren und mit einer Pair-Referenz ausstatten
+  // duplicate card stack an establish pair reference
   const initialArray = arr.map(d => {return {...d, pair:d.link, onBoard: true}})
   const siblings = initialArray.slice().map(d => {return {...d,id: d.id + "-2"}})
   const newArray = initialArray.concat(siblings)
-
   return newArray
-
 }
 
 function shuffleCardStack(array) { //https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
@@ -62,20 +58,44 @@ function shuffleCardStack(array) { //https://stackoverflow.com/questions/2450954
       array[i] = array[j];
       array[j] = temp;
   }
-
   return array
 }
 
 function App() {
 
-  const cardStack = shuffleCardStack(duplicateCardStack(cardSelection))
-  //const cardStack = shuffleCardStack(duplicateCardStack(cardData))
+  let cardStack = []
   const [cards, setCards] = useState(cardStack)
   const cardsFlipped = cards.filter((d)=> {return d.position === "faceUp"})
   const numCardsFlipped = cardsFlipped.length
   const [gamePhase, setGamePhase] = useState("setup") // setup, flipping, pair, end
 
-  const startGame = () => {setGamePhase("flipping")}
+  const startGame = (e) => {
+    
+    // create card stack base on user input
+    e.preventDefault()
+    let sel = []
+    const value = e.target[0].value
+    const idValues = [...value.matchAll(/[\d]+/g)]
+
+    if (value.includes("subcat-")) { // use data from subcategory
+        sel = cardData[idValues[0]-1]
+        .subcategories
+        .filter(d=>d.id===Number(idValues[1]))[0]
+        .subcat_articles
+    } else if (value.includes("cat-")) { // use data from category
+        sel = cardData[idValues[0]-1].subcategories
+    } else { // use all data
+        sel = cardData;
+    }
+
+    const randomCards = drawRandomCards(sel)
+    const duplicatedCards = duplicateCardStack(randomCards)
+    const shuffledCards = shuffleCardStack(duplicatedCards)
+    cardStack = shuffledCards
+    setCards(cardStack)
+    setGamePhase("flipping")
+  
+  }
 
   if (numCardsFlipped === 2) {
     if (cardsFlipped[0].pair === cardsFlipped[1].pair) {
@@ -125,7 +145,7 @@ function App() {
   return (
     <>
       {gamePhase === "setup" &&
-        <Settings handleClick={startGame}/>      
+        <Settings handleSubmit={startGame}/>      
       }
       {gamePhase === "pair" &&
         <InfoOnPair handleRemovePair={()=>removePair()} flippedCard={cardsFlipped[0]}/>      
@@ -134,6 +154,9 @@ function App() {
         <Board>
           {cardItems}
         </Board>
+      }
+      {gamePhase === "end" &&
+        <h1>This is the End!</h1>
       }
     </>
   );
