@@ -2,45 +2,21 @@ import cardData from "./full-data-good-articles.json";
 
 export function Settings({handleSubmit}) {
 
-    // function handleSubmit(e){
-    //     e.preventDefault()
-    //     console.log(e.target[0].value)
-    // }
-
     return (
         <>
-            <h1>Settings first!</h1>
-            <form method="post" onSubmit={handleSubmit}>
+            <h1 style={{"textAlign":"center"}}>Choose your Cardstack ...</h1>
+            <form className="mt-4" method="post" onSubmit={handleSubmit}>
             <SelectCards />
-            <button type="submit" className="btn btn-primary">Click</button>
-            {/* <button type="submit" className="btn btn-primary" onClick={handleClick}>Click</button> */}
+            <div style={{"textAlign":"center"}}>
+
+            <button type="submit" className="btn btn-primary mt-4">Start Game!</button>
+            </div>
             </form>
         </>
     )
 }
 
 function SelectCards() {
-
-    // choose card backlist based on user selection input
-    // function handleChange(e) {
-        
-    //     let cardSelection = []
-    //     const value = e.target.value
-    //     const idValues = [...value.matchAll(/[\d]+/g)]
-
-    //     if (value.includes("subcat-")) { // use data from subcategory
-    //         cardSelection = cardData[idValues[0]-1]
-    //         .subcategories
-    //         .filter(d=>d.id===Number(idValues[1]))[0]
-    //         .subcat_articles
-    //     } else if (value.includes("cat-")) { // use data from category
-    //         cardSelection = cardData[idValues[0]-1].subcategories
-    //     } else { // use all data
-    //         cardSelection = cardData;
-    //     }
-
-    //     console.log(cardSelection)
-    // }
 
     // create selection options
     const options = cardData.map((d)=>{

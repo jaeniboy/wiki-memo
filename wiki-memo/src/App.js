@@ -1,9 +1,14 @@
 import {useState} from "react";
 import cardData from "./full-data-good-articles.json";
 import {Settings} from "./Settings.js"
+import {End} from "./End.js"
 //import cardData from "./av.json";
 
-//To-Do: Bugfix /wiki/Seattle_Storm
+//To-Do: 
+// Bugfix fehlende Bilder und Texte /wiki/Seattle_Storm
+// Bugfix zu kleine Kategorien
+// Feature Portrait-Ausrichtung des Spielfeldes
+// Refactoring Board und Funktionen auslagern
 
 //const cardSelection = drawRandomCards(cardData)
 
@@ -67,10 +72,10 @@ function App() {
   const [cards, setCards] = useState(cardStack)
   const cardsFlipped = cards.filter((d)=> {return d.position === "faceUp"})
   const numCardsFlipped = cardsFlipped.length
+  const remainingCards = cards.filter(d=>d.onBoard).length
   const [gamePhase, setGamePhase] = useState("setup") // setup, flipping, pair, end
 
   const startGame = (e) => {
-    
     // create card stack base on user input
     e.preventDefault()
     let sel = []
@@ -91,6 +96,7 @@ function App() {
     const randomCards = drawRandomCards(sel)
     const duplicatedCards = duplicateCardStack(randomCards)
     const shuffledCards = shuffleCardStack(duplicatedCards)
+    //cardStack = duplicatedCards 
     cardStack = shuffledCards
     setCards(cardStack)
     setGamePhase("flipping")
@@ -126,17 +132,22 @@ function App() {
       }
     })
     setCards(pairRemoved)
-    setGamePhase("flipping")
+    console.log("Lenght: "+remainingCards)
+
+    if (remainingCards === 2) {
+      setGamePhase("end")
+    } else {
+      setGamePhase("flipping")
+    }
+  }
+
+  const restartGame = () =>{
+    setGamePhase("setup")
   }
 
   const cardItems = cards.map(d => {
     return <Card 
       key={d.id}
-      // position={d.position} 
-      // id={d.pair}
-      // title={d.title}
-      // onBoard={d.onBoard}
-      // image={d.img_url}
       data = {d}
       handleFlip={()=> numCardsFlipped!==2 && flipCard(d.id)}
       />
@@ -145,18 +156,22 @@ function App() {
   return (
     <>
       {gamePhase === "setup" &&
-        <Settings handleSubmit={startGame}/>      
+        <Flexbox>
+          <Settings handleSubmit={startGame}/>      
+        </Flexbox>
       }
       {gamePhase === "pair" &&
         <InfoOnPair handleRemovePair={()=>removePair()} flippedCard={cardsFlipped[0]}/>      
       }
-      {gamePhase !== "setup" &&
+      {(gamePhase === "flipping" || gamePhase === "pair") &&
         <Board>
           {cardItems}
         </Board>
       }
       {gamePhase === "end" &&
-        <h1>This is the End!</h1>
+        <Flexbox>
+          <End handleClick={restartGame}/>
+        </Flexbox>
       }
     </>
   );
@@ -173,7 +188,6 @@ function Board({children}) {
 }
 
 function Card({handleFlip, data}) {
-  console.log(data)
   return (
     <div className={"memo-card "  + (data.onBoard === false ? "card-hidden" : null)} onClick={handleFlip}>
         <div style={{backgroundImage: `url("${data.img_url}")`}} className={"card-front " + (data.position !== "faceUp" && "hidden")}>
@@ -198,6 +212,16 @@ function InfoOnPair({handleRemovePair, flippedCard}) {
               </div>
           </div>
         </div>
+      </div>
+    </div>
+  )
+}
+
+function Flexbox ({children}) {
+  return (
+    <div className="d-flex justify-content-center vh-100 align-items-center">
+      <div className="d-flex flex-column">
+      {children}
       </div>
     </div>
   )
