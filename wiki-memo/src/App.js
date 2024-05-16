@@ -19,31 +19,35 @@ function getRandIndex(arr) {
 function drawRandomCards(cards) {
   let drawnCards = []
   let drawnUrls = []
-  while(drawnCards.length < 12) {
-    let card = {}
-    const randIndex = getRandIndex(cards)
-    if (cards[randIndex].hasOwnProperty("subcategories")) { // it's a category
+  if (cards.length > 12) {
+    while(drawnCards.length < 12) {
+      let card = {}
+      const randIndex = getRandIndex(cards)
+      if (cards[randIndex].hasOwnProperty("subcategories")) { // it's a category
 
-      const secondRand = getRandIndex(cards[randIndex].subcategories)
-      const randSubcat = cards[randIndex].subcategories[secondRand]
+        const secondRand = getRandIndex(cards[randIndex].subcategories)
+        const randSubcat = cards[randIndex].subcategories[secondRand]
 
-      const thirdRand = getRandIndex(randSubcat.subcat_articles)
-      card = randSubcat.subcat_articles[thirdRand]
+        const thirdRand = getRandIndex(randSubcat.subcat_articles)
+        card = randSubcat.subcat_articles[thirdRand]
 
-    } else if (cards[randIndex].hasOwnProperty("subcat_articles")) { // it's a subcategory
-      
-      const secondRand = getRandIndex(cards[randIndex].subcat_articles)
-      card = cards[randIndex].subcat_articles[secondRand]
-      
-    } else { // it's a article
+      } else if (cards[randIndex].hasOwnProperty("subcat_articles")) { // it's a subcategory
+        
+        const secondRand = getRandIndex(cards[randIndex].subcat_articles)
+        card = cards[randIndex].subcat_articles[secondRand]
+        
+      } else { // it's a article
 
-      card = cards[randIndex]
+        card = cards[randIndex]
+      }
+      // avoid dulicated cards
+      if (!drawnUrls.includes(card.link)) {
+        drawnCards.push(card)
+        drawnUrls.push(card.link)
+      }
     }
-
-    if (!drawnUrls.includes(card.link)) {
-      drawnCards.push(card)
-      drawnUrls.push(card.link)
-    }
+  } else {
+    drawnCards = cards
   }
   return drawnCards
 }
