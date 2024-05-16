@@ -19,8 +19,14 @@ def get_article_summary(article_name):
 
 def get_article_data(link):
     article_name = link.split("/")[2]
-    img_url = get_img_url(article_name)
-    article_summary = get_article_summary(article_name)
+    try:
+        img_url = get_img_url(article_name)
+    except:
+        img_url = ""
+    try:
+        article_summary = get_article_summary(article_name)
+    except:
+        article_summary = "No summary available"
     return article_summary, img_url
 
 with open('first-data-good-articles.json', encoding='utf-8') as f:
@@ -44,7 +50,7 @@ for num_cat, category in enumerate(d):
             except:
                 pass
 
-with open('../src/full-data-good-articles.json', 'w', encoding='utf8') as json_file:
+with open('../src/full-data-good-articles_2.json', 'w', encoding='utf8') as json_file:
     json.dump(d, json_file, ensure_ascii=False)
 
 

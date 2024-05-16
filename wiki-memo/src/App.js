@@ -6,7 +6,6 @@ import {End} from "./End.js"
 
 //To-Do: 
 // Bugfix fehlende Bilder und Texte /wiki/Seattle_Storm
-// Bugfix zu kleine Kategorien
 // Feature Portrait-Ausrichtung des Spielfeldes
 // Refactoring Board und Funktionen auslagern
 
@@ -24,20 +23,14 @@ function drawRandomCards(cards) {
       let card = {}
       const randIndex = getRandIndex(cards)
       if (cards[randIndex].hasOwnProperty("subcategories")) { // it's a category
-
         const secondRand = getRandIndex(cards[randIndex].subcategories)
         const randSubcat = cards[randIndex].subcategories[secondRand]
-
         const thirdRand = getRandIndex(randSubcat.subcat_articles)
         card = randSubcat.subcat_articles[thirdRand]
-
       } else if (cards[randIndex].hasOwnProperty("subcat_articles")) { // it's a subcategory
-        
         const secondRand = getRandIndex(cards[randIndex].subcat_articles)
         card = cards[randIndex].subcat_articles[secondRand]
-        
       } else { // it's a article
-
         card = cards[randIndex]
       }
       // avoid dulicated cards
@@ -50,6 +43,43 @@ function drawRandomCards(cards) {
     drawnCards = cards
   }
   return drawnCards
+}
+
+function createDummyImg(title,color) {
+
+  const letters = title.slice(0,2)
+  let canvas = document.createElement("canvas")
+  canvas.height = 500
+  canvas.width = 500
+  
+  let ctx = canvas.getContext("2d")
+  ctx.fillStyle = color
+  ctx.fillRect(0,0,500,500)
+  ctx.font = "300px Arial"
+  ctx.fillStyle = "#fff";
+  ctx.textBaseline = "middle"; 
+  ctx.textAlign = "center"; 
+  ctx.fillText(letters,250,250)
+  
+  return canvas.toDataURL()
+}
+
+function insertDummyImages(arr) {
+  const colors = ["#FFCCCC","#FFE5CC","#FFFFCC","#E5FFCC","#CCFFCC","#CCFFE5","#CCFFFF","#CCE5FF","#CCCCFF","#E5CCFF","#FFCCE5"]
+  let i = 0
+  let url = "https://atlas-content-cdn.pixelsquid.com/stock-images/crash-test-dummy-head-EKq9qNA-600.jpg"
+  const newArray = arr.map((d)=> {
+    if (!d.img_url || d.img_url === "") {
+      let url = createDummyImg(d.title,colors[i])
+      i++
+      return (
+        {...d,img_url:url}
+      )
+    } else {
+      return d
+    }
+  })
+  return newArray
 }
 
 function duplicateCardStack(arr) {
@@ -98,10 +128,11 @@ function App() {
     }
 
     const randomCards = drawRandomCards(sel)
-    const duplicatedCards = duplicateCardStack(randomCards)
+    const cardsWithDummys = insertDummyImages(randomCards)
+    const duplicatedCards = duplicateCardStack(cardsWithDummys)
     const shuffledCards = shuffleCardStack(duplicatedCards)
-    //cardStack = duplicatedCards 
-    cardStack = shuffledCards
+    cardStack = duplicatedCards 
+    //cardStack = shuffledCards
     setCards(cardStack)
     setGamePhase("flipping")
   
@@ -150,6 +181,7 @@ function App() {
   }
 
   const cardItems = cards.map(d => {
+
     return <Card 
       key={d.id}
       data = {d}
