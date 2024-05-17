@@ -1,34 +1,45 @@
 function getRandIndex(arr) {
     return Math.floor(Math.random() * arr.length)
   }
+
+function checkStackLevel(arr) {
+  if (arr[0].hasOwnProperty("subcategories")) {
+    return "all"
+  } else if (arr[0].hasOwnProperty("subcat_articles")) {
+    return "category"
+  } else {
+    return "subcategory"
+  }
+}
   
 function drawRandomCards(cards) {
     let drawnCards = []
     let drawnUrls = []
-    if (cards.length > 12) {
+    const cardsStackLevel = checkStackLevel(cards)
+    if ((cardsStackLevel === "subcategory") && (cards.length < 12)) {
+      drawnCards = cards
+    } else {
       while(drawnCards.length < 12) {
         let card = {}
         const randIndex = getRandIndex(cards)
-        if (cards[randIndex].hasOwnProperty("subcategories")) { // it's a category
+        if (cardsStackLevel === "all") {
           const secondRand = getRandIndex(cards[randIndex].subcategories)
           const randSubcat = cards[randIndex].subcategories[secondRand]
           const thirdRand = getRandIndex(randSubcat.subcat_articles)
           card = randSubcat.subcat_articles[thirdRand]
-        } else if (cards[randIndex].hasOwnProperty("subcat_articles")) { // it's a subcategory
+        } else if (cardsStackLevel === "category") {
           const secondRand = getRandIndex(cards[randIndex].subcat_articles)
           card = cards[randIndex].subcat_articles[secondRand]
-        } else { // it's a article
+        } else {
           card = cards[randIndex]
         }
-        // avoid dulicated cards
+        // avoid dulicates
         if (!drawnUrls.includes(card.link)) {
           drawnCards.push(card)
           drawnUrls.push(card.link)
         }
       }
-    } else {
-      drawnCards = cards
-    }
+    } 
     return drawnCards
 }
   
