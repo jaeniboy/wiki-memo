@@ -5,7 +5,6 @@ import {End} from "./End.js"
 //import cardData from "./av.json";
 
 //To-Do: 
-// Bugfix fehlende Bilder und Texte /wiki/Seattle_Storm
 // Feature Portrait-Ausrichtung des Spielfeldes
 // Refactoring Board und Funktionen auslagern
 
@@ -131,8 +130,8 @@ function App() {
     const cardsWithDummys = insertDummyImages(randomCards)
     const duplicatedCards = duplicateCardStack(cardsWithDummys)
     const shuffledCards = shuffleCardStack(duplicatedCards)
-    cardStack = duplicatedCards 
-    //cardStack = shuffledCards
+    //cardStack = duplicatedCards 
+    cardStack = shuffledCards
     setCards(cardStack)
     setGamePhase("flipping")
   

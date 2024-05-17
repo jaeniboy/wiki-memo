@@ -36,7 +36,7 @@ articles = d[0]["subcategories"][0]["subcat_articles"]
 
 for num_cat, category in enumerate(d):
 
-    print(num_cat, "of", len(d), "-",category["category-title"])
+    print(num_cat, "of", len(d), "-",category["category_title"])
     subcats = category["subcategories"]
 
     for num_subcat, subcat in enumerate(subcats):
