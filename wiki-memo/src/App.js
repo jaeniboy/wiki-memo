@@ -137,7 +137,7 @@ function App() {
     // const shuffledCards = shuffleCardStack(duplicatedCards)
     // //cardStack = duplicatedCards 
     // cardStack = shuffledCards
-    cardStack = prepareCardDeck(sel, false)
+    cardStack = prepareCardDeck(sel, true)
     setCards(cardStack)
     setGamePhase("flipping")
   
