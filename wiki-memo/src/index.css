@@ -13,7 +13,53 @@ code {
     monospace;
 }
 
-.memo-card {
+@media screen and (orientation:landscape) {
+
+  .memo-card {
+    --margin: 4px;
+    --edge-length: calc(100vh / 4 - var(--margin));
+    --max-edge-length: calc(100vw * 0.666666 / 4 - var(--margin));
+    width: var(--edge-length);
+    height: var(--edge-length);
+    max-width: var(--max-edge-length);
+    max-height: var(--max-edge-length);
+    margin: calc(var(--margin) / 2);
+    float: left;
+  }
+
+  .board {
+    background-color: #cdcdcd;
+    height: 100vh;
+    max-height: calc(100vw * 0.666666);
+    width: calc(100vh * 1.5);
+  }
+
+}
+
+@media screen and (orientation:portrait) {
+
+  .memo-card {
+    --margin: 4px;
+    --edge-length: calc(100vw / 4 - var(--margin));
+    --max-edge-length: calc(100vh * 0.666666 / 4 - var(--margin));
+    width: var(--edge-length);
+    height: var(--edge-length);
+    max-width: var(--max-edge-length);
+    max-height: var(--max-edge-length);
+    margin: calc(var(--margin) / 2);
+    float: left;
+  }
+
+  .board {
+    background-color: #cdcdcd;
+    width: 100vw;
+    max-width: calc(100vh * 0.666666);
+    max-height: calc(100vw * 1.5);
+  }
+
+}
+
+/* .memo-card {
   --margin: 4px;
   --edge-length: calc(100vh / 4 - var(--margin));
   --max-edge-length: calc(100vw * 0.666666 / 4 - var(--margin));
@@ -23,7 +69,7 @@ code {
   max-height: var(--max-edge-length);
   margin: calc(var(--margin) / 2);
   float: left;
-}
+} */
 
 .memo-card div {
   height: 100%;
@@ -43,12 +89,12 @@ code {
   background-repeat: no-repeat;
 }
 
-.board {
+/* .board {
   background-color: #cdcdcd;
   height: 100vh;
   max-height: calc(100vw * 0.666666);
   width: calc(100vh * 1.5);
-}
+} */
 
 .card-hidden {
   visibility: hidden;
