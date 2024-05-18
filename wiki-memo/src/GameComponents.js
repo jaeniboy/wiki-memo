@@ -1,9 +1,11 @@
 export function Board({children}) {
     return (
-    <div className="board-wrapper d-flex justify-content-center">
+    <div className="full-screen vh-100 vw-100 d-flex align-items-center justify-content-center"> 
+    <div className="board-wrapper d-flex justify-content-center ">
             <div className="board">
                 {children}
             </div>
+    </div>
     </div>
     )
 }
