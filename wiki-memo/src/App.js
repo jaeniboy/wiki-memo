@@ -8,9 +8,6 @@ import {End} from "./End.js"
 //import cardData from "./av.json";
 
 //To-Do: 
-// Bugfix Alle Kategorien: Zufallsauswahl scheint nicht bis zu den Artikel vorzudringen
-// Bugfix Spielfeld bei Portraitausrichtung zentrieren
-// Bugfix Margin bei Pair Infopage entfernen
 // Schnelleres Laden von Bildern ermöglichen
 // Counter für die Spielzüge
 // Ansehen aller Karten auf der End-Page
@@ -42,7 +39,7 @@ function App() {
         sel = cardData;
     }
 
-    cardStack = prepareCardDeck(sel, true)
+    cardStack = prepareCardDeck(sel, false)
     setCards(cardStack)
     setGamePhase("flipping")
   
