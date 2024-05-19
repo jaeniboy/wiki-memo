@@ -9,8 +9,11 @@ import {End} from "./End.js"
 
 //To-Do: 
 // Bugfix Alle Kategorien: Zufallsauswahl scheint nicht bis zu den Artikel vorzudringen
-// Feature Portrait-Ausrichtung des Spielfeldes
-
+// Bugfix Spielfeld bei Portraitausrichtung zentrieren
+// Bugfix Margin bei Pair Infopage entfernen
+// Schnelleres Laden von Bildern ermöglichen
+// Counter für die Spielzüge
+// Ansehen aller Karten auf der End-Page
 
 function App() {
 
