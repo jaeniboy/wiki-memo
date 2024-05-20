@@ -72,7 +72,7 @@ code {
   float: left;
 } */
 
-.memo-card div {
+.memo-card div, .showall-card {
   height: 100%;
   border-radius: 10px;
   box-shadow: 2px 2px 3px;
