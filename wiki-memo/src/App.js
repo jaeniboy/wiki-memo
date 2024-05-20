@@ -9,11 +9,11 @@ import {End} from "./End.js"
 
 //To-Do: 
 // Schnelleres Laden von Bildern ermöglichen
-// Counter für die Spielzüge
 // Ansehen aller Karten auf der End-Page
 // Bugfix Zentriertung von Ziffern auf Dummy Karten 
 // ... wenn zweites Zeichen ein Leerzeichen 
 // ... https://de.wikipedia.org/wiki/4_VD_14,5/12-1_SRW
+// Flat nested json
 
 //var playMoves = 0;
 
@@ -24,7 +24,7 @@ function App() {
   const cardsFlipped = cards.filter((d)=> {return d.position === "faceUp"})
   const numCardsFlipped = cardsFlipped.length
   const remainingCards = cards.filter(d=>d.onBoard).length
-  const [gamePhase, setGamePhase] = useState("end") // setup, flipping, pair, end
+  const [gamePhase, setGamePhase] = useState("setup") // setup, flipping, pair, end
   const [numMoves, setNumMoves] = useState(0)
 
   const startGame = (e) => {
