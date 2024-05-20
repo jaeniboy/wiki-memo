@@ -11,6 +11,11 @@ import {End} from "./End.js"
 // Schnelleres Laden von Bildern ermöglichen
 // Counter für die Spielzüge
 // Ansehen aller Karten auf der End-Page
+// Bugfix Zentriertung von Ziffern auf Dummy Karten 
+// ... wenn zweites Zeichen ein Leerzeichen 
+// ... https://de.wikipedia.org/wiki/4_VD_14,5/12-1_SRW
+
+//var playMoves = 0;
 
 function App() {
 
@@ -19,7 +24,8 @@ function App() {
   const cardsFlipped = cards.filter((d)=> {return d.position === "faceUp"})
   const numCardsFlipped = cardsFlipped.length
   const remainingCards = cards.filter(d=>d.onBoard).length
-  const [gamePhase, setGamePhase] = useState("setup") // setup, flipping, pair, end
+  const [gamePhase, setGamePhase] = useState("end") // setup, flipping, pair, end
+  const [numMoves, setNumMoves] = useState(0)
 
   const startGame = (e) => {
     // create card stack base on user input
@@ -50,7 +56,7 @@ function App() {
       setTimeout(()=>setGamePhase("pair"),100) 
     } else {
       const allCardsDown = cards.map((d) => {return {...d, position: "faceDown"}})
-      setTimeout(()=>setCards(allCardsDown),1000) 
+      setTimeout(()=>setCards(allCardsDown),1000)
     }
   }
   
@@ -62,7 +68,8 @@ function App() {
         return d
       }
     })
-    setCards(newCards)  
+    setCards(newCards)
+    setNumMoves(numMoves + 0.5)
   }
 
   const removePair = () => {
@@ -113,7 +120,10 @@ function App() {
       }
       {gamePhase === "end" &&
         <Flexbox>
-          <End handleClick={restartGame}/>
+          <End 
+            handleClick={restartGame}
+            numMoves={numMoves}
+          />
         </Flexbox>
       }
     </>
