@@ -8,7 +8,6 @@ import {End} from "./End.js"
 //import cardData from "./av.json";
 
 //To-Do: 
-// Schnelleres Laden von Bildern ermöglichen
 // Ansehen aller Karten auf der End-Page
 // Bugfix Zentriertung von Ziffern auf Dummy Karten 
 // ... wenn zweites Zeichen ein Leerzeichen 
@@ -24,8 +23,15 @@ function App() {
   const cardsFlipped = cards.filter((d)=> {return d.position === "faceUp"})
   const numCardsFlipped = cardsFlipped.length
   const remainingCards = cards.filter(d=>d.onBoard).length
+  const images = cards.map(d=>d.img_url)
   const [gamePhase, setGamePhase] = useState("setup") // setup, flipping, pair, end
   const [numMoves, setNumMoves] = useState(0)
+
+  // preload images for better user experience
+  for (const image of images) {
+    const imageElement = new Image();
+    imageElement.src = image;
+  }
 
   const startGame = (e) => {
     // create card stack base on user input
