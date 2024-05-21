@@ -138,6 +138,7 @@ function App() {
       {gamePhase === "showall" &&
         <Showall 
           cards={cards}
+          handleClick={restartGame}
         />
       }
     </>

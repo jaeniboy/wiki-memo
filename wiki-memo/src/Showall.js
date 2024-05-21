@@ -1,28 +1,34 @@
-export function Showall({cards}) {
-    console.log(cards)
+import { BoxArrowUpRight, ArrowClockwise } from 'react-bootstrap-icons'
+
+export function Showall({cards, handleClick}) {
 
     const cardsUnique = cards.filter(d=>typeof d.id === "number")
     const thumbnails = cardsUnique.map((d)=>{
         return (
-            <div className="row h-25">
+            <div className="row ms-3 mb-4 me-2 mh-25" style={{ "overflow":"hidden", }}>
                 <div style=
                     {{
-                        "backgroundImage":`url("${d.img_url}")`//,
-                        //"height":"100px"
-                    }} className="showall-card card-front w-25 ratio ratio-1x1 col-3">
+                        "backgroundImage":`url("${d.img_url}")`,
+                        "width":"9em",
+                        "fload":"left !important"
+                    }} className="showall-card card-front ratio ratio-1x1 p-0 m-1 col-sm-3">
                 </div>
-                <div className="col-9">
-                    <h4>{d.title}</h4>
-                    <div>{d.summary}</div>
+                <div className="col-sm-9" style={{"maxHeight":"200px"}}>
+                    
+                    <h4>{d.title} <a href={"https://de.wikipedia.org" + d.link} target="_blank"><BoxArrowUpRight className="mb-1 ms-2" size={16} /></a></h4>
+                    <div className="" style={{}}>{d.summary}</div>
                 </div>
             </div>
         )
     })
-    console.log(thumbnails)
 
     return (
         <>
-            <h1>All Cards used in the game</h1>
+            <h1 className="ms-4 mb-5 mt-4">All Cards used  
+                <button className='btn btn-outline-primary btn-sm ms-3' onClick={handleClick}>Restart Game 
+                    <ArrowClockwise className="mb-1 ms-1"/>
+                </button>
+            </h1>
             {thumbnails}
         </>
     )
