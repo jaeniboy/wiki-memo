@@ -9,14 +9,12 @@ import {Showall} from "./Showall.js"
 //import cardData from "./av.json";
 
 //To-Do: 
-// Ansehen aller Karten auf der End-Page
 // Bugfix Zentriertung von Ziffern auf Dummy Karten 
 // ... wenn zweites Zeichen ein Leerzeichen 
 // ... https://de.wikipedia.org/wiki/4_VD_14,5/12-1_SRW
 // Flat nested json
 // Kategorien mit weniger als 12 Artikeln in Auswahl deaktivieren
-
-//var playMoves = 0;
+// Bugfix Scrollen auf dem handy bei Pair führt zu unbeabsichtigtem Neu-Laden der Seite
 
 function App() {
 
@@ -55,9 +53,8 @@ function App() {
 
     cardStack = prepareCardDeck(sel, false)
     setCards(cardStack)
-    //setGamePhase("flipping")
-    setGamePhase("end")
-  
+    setGamePhase("flipping")
+    //setGamePhase("end")
   }
 
   if (numCardsFlipped === 2) {
