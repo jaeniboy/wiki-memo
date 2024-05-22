@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import cardData from "./full-data-good-articles.json";
 import {Settings} from "./Settings.js"
 import {prepareCardDeck} from "./GamePrep.js"
@@ -25,6 +25,17 @@ function App() {
   const images = cards.map(d=>d.img_url)
   const [gamePhase, setGamePhase] = useState("setup") // setup, flipping, pair, end, showall
   const [numMoves, setNumMoves] = useState(0)
+
+  useEffect(() => {
+    const unloadCallback = (event) => {
+      event.preventDefault();
+      event.returnValue = "";
+      return "";
+    };
+  
+    window.addEventListener("beforeunload", unloadCallback);
+    return () => window.removeEventListener("beforeunload", unloadCallback);
+  }, []);
 
   // preload images for better user experience
   for (const image of images) {
