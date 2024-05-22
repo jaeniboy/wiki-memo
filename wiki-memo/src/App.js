@@ -13,7 +13,6 @@ import {Showall} from "./Showall.js"
 // ... wenn zweites Zeichen ein Leerzeichen 
 // ... https://de.wikipedia.org/wiki/4_VD_14,5/12-1_SRW
 // Flat nested json
-// Kategorien mit weniger als 12 Artikeln in Auswahl deaktivieren
 // Bugfix Scrollen auf dem handy bei Pair führt zu unbeabsichtigtem Neu-Laden der Seite
 
 function App() {
