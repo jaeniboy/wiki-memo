@@ -13,6 +13,7 @@ import {End} from "./End.js"
 // ... wenn zweites Zeichen ein Leerzeichen 
 // ... https://de.wikipedia.org/wiki/4_VD_14,5/12-1_SRW
 // Flat nested json
+// Kategorien mit weniger als 12 Artikeln in Auswahl deaktivieren
 
 //var playMoves = 0;
 
