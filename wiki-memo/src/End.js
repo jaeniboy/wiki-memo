@@ -1,4 +1,4 @@
-export function End({handleClick, numMoves}) {
+export function End({handleClick, numMoves, handleShowCards}) {
     return (
         <>
             <h1 style={{"textAlign":"center"}}>The End Page</h1>
@@ -9,7 +9,13 @@ export function End({handleClick, numMoves}) {
             <div style={{"textAlign":"center"}}>
                 <button style={{"width":"fit-content"}} className="btn btn-primary mt-4" onClick={handleClick}>Play it again, Sam!</button>
             </div>
-            <small className="mt-4" style={{"textAlign":"center"}}>Wait... thats all?!<br /> Show me my cards at least!</small>
+            <small className="mt-4" style={{"textAlign":"center"}}>Wait... thats all?!<br />
+                <span 
+                    onClick={handleShowCards} 
+                    style={{"cursor":"pointer"}}
+                    className="link-primary">Show me my cards at least!
+                </span>
+            </small>
         </>
     )
 }

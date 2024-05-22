@@ -4,6 +4,7 @@ import {Settings} from "./Settings.js"
 import {prepareCardDeck} from "./GamePrep.js"
 import {Board, Card, InfoOnPair} from "./GameComponents.js"
 import {End} from "./End.js"
+import {Showall} from "./Showall.js"
 
 //import cardData from "./av.json";
 
@@ -25,7 +26,7 @@ function App() {
   const numCardsFlipped = cardsFlipped.length
   const remainingCards = cards.filter(d=>d.onBoard).length
   const images = cards.map(d=>d.img_url)
-  const [gamePhase, setGamePhase] = useState("setup") // setup, flipping, pair, end
+  const [gamePhase, setGamePhase] = useState("setup") // setup, flipping, pair, end, showall
   const [numMoves, setNumMoves] = useState(0)
 
   // preload images for better user experience
@@ -54,7 +55,8 @@ function App() {
 
     cardStack = prepareCardDeck(sel, false)
     setCards(cardStack)
-    setGamePhase("flipping")
+    //setGamePhase("flipping")
+    setGamePhase("end")
   
   }
 
@@ -130,8 +132,15 @@ function App() {
           <End 
             handleClick={restartGame}
             numMoves={numMoves}
+            handleShowCards={()=>setGamePhase("showall")}
           />
         </Flexbox>
+      }
+      {gamePhase === "showall" &&
+        <Showall 
+          cards={cards}
+          handleClick={restartGame}
+        />
       }
     </>
   );
