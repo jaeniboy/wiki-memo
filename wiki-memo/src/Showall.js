@@ -9,13 +9,12 @@ export function Showall({cards, handleClick}) {
                 <div style=
                     {{
                         "backgroundImage":`url("${d.img_url}")`,
-                        "width":"9em",
-                        "fload":"left !important"
-                    }} className="showall-card card-front ratio ratio-1x1 p-0 m-1 col-sm-3">
+                        "width":"9em"
+                    }} className="showall-card card-front ratio ratio-1x1 p-0 m-1 ms-5 ms-sm-1 mb-4 mb-sm-1 col-sm-3">
                 </div>
                 <div className="col-sm-9" style={{"maxHeight":"200px"}}>
                     
-                    <h4>{d.title} <a href={"https://de.wikipedia.org" + d.link} target="_blank"><BoxArrowUpRight className="mb-1 ms-2" size={16} /></a></h4>
+                    <h4>{d.title} <a href={"https://de.wikipedia.org" + d.link} target="_blank"  rel="noreferrer"><BoxArrowUpRight className="mb-1 ms-2" size={16} /></a></h4>
                     <div className="" style={{}}>{d.summary}</div>
                 </div>
             </div>
@@ -25,7 +24,7 @@ export function Showall({cards, handleClick}) {
     return (
         <>
             <h1 className="ms-4 mb-5 mt-4">All Cards used  
-                <button className='btn btn-outline-primary btn-sm ms-3' onClick={handleClick}>Restart Game 
+                <button className='btn btn-outline-primary btn-sm ms-3 mb-1' onClick={handleClick}>Restart Game 
                     <ArrowClockwise className="mb-1 ms-1"/>
                 </button>
             </h1>
