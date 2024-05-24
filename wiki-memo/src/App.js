@@ -1,10 +1,13 @@
 import {useState, useEffect} from "react";
-import cardData from "./full-data-good-articles.json";
+//import cardData from "./full-data-good-articles.json";
+import cardData from "./wikipedia-data-flat.json";
 import {Settings} from "./Settings.js"
 import {prepareCardDeck} from "./GamePrep.js"
 import {Board, Card, InfoOnPair} from "./GameComponents.js"
 import {End} from "./End.js"
 import {Showall} from "./Showall.js"
+
+//console.log(cardData)
 
 //import cardData from "./av.json";
 
@@ -13,6 +16,8 @@ import {Showall} from "./Showall.js"
 // ... wenn zweites Zeichen ein Leerzeichen 
 // ... https://de.wikipedia.org/wiki/4_VD_14,5/12-1_SRW
 // Flat nested json
+// test flatted json with missing subcats or cats
+// write settings file
 
 function App() {
 
