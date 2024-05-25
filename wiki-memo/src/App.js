@@ -43,7 +43,7 @@ function App() {
     return () => window.removeEventListener("beforeunload", unloadCallback);
   }, []);
 
-  // preload images for better user experience
+  // preload images
   for (const image of images) {
     const imageElement = new Image();
     imageElement.src = image;
@@ -54,17 +54,15 @@ function App() {
     e.preventDefault()
     let sel = []
     const value = e.target[0].value
-    const idValues = [...value.matchAll(/[\d]+/g)]
 
-    if (value.includes("subcat-")) { // use data from subcategory
-        sel = cardData[idValues[0]-1]
-        .subcategories
-        .filter(d=>d.id===Number(idValues[1]))[0]
-        .subcat_articles
-    } else if (value.includes("cat-")) { // use data from category
-        sel = cardData[idValues[0]-1].subcategories
-    } else { // use all data
-        sel = cardData;
+    if (value.includes("subcat-")) {
+      const subcatName = value.match(/subcat-(.*)/)[1]
+      sel = cardData.filter(d=>d.subcategory===subcatName)
+    } else if (value.includes("cat-")) {
+      const catName = value.match(/cat-(.*)/)[1]
+      sel = cardData.filter(d=>d.category===catName)
+    } else {
+      sel = cardData;
     }
 
     cardStack = prepareCardDeck(sel, false)
@@ -117,7 +115,6 @@ function App() {
   }
 
   const cardItems = cards.map(d => {
-
     return <Card 
       key={d.id}
       data = {d}

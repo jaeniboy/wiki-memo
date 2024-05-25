@@ -1,38 +1,17 @@
 function getRandIndex(arr) {
     return Math.floor(Math.random() * arr.length)
   }
-
-function checkStackLevel(arr) {
-  if (arr[0].hasOwnProperty("subcategories")) {
-    return "all"
-  } else if (arr[0].hasOwnProperty("subcat_articles")) {
-    return "category"
-  } else {
-    return "subcategory"
-  }
-}
   
 function drawRandomCards(cards) {
     let drawnCards = []
     let drawnUrls = []
-    const cardsStackLevel = checkStackLevel(cards)
-    if ((cardsStackLevel === "subcategory") && (cards.length < 12)) {
+    if (cards.length < 12) {
       drawnCards = cards
     } else {
       while(drawnCards.length < 12) {
         let card = {}
         const randIndex = getRandIndex(cards)
-        if (cardsStackLevel === "all") {
-          const secondRand = getRandIndex(cards[randIndex].subcategories)
-          const randSubcat = cards[randIndex].subcategories[secondRand]
-          const thirdRand = getRandIndex(randSubcat.subcat_articles)
-          card = randSubcat.subcat_articles[thirdRand]
-        } else if (cardsStackLevel === "category") {
-          const secondRand = getRandIndex(cards[randIndex].subcat_articles)
-          card = cards[randIndex].subcat_articles[secondRand]
-        } else {
-          card = cards[randIndex]
-        }
+        card = cards[randIndex]
         // avoid dulicates
         if (!drawnUrls.includes(card.link)) {
           drawnCards.push(card)
@@ -65,7 +44,6 @@ function createDummyImg(title,color) {
 function insertDummyImages(arr) {
     const colors = ["#FFCCCC","#FFE5CC","#FFFFCC","#E5FFCC","#CCFFCC","#CCFFE5","#CCFFFF","#CCE5FF","#CCCCFF","#E5CCFF","#FFCCE5"]
     let i = 0
-    let url = "https://atlas-content-cdn.pixelsquid.com/stock-images/crash-test-dummy-head-EKq9qNA-600.jpg"
     const newArray = arr.map((d)=> {
       console.log(d)
       if (!d.img_url || d.img_url === "") {

@@ -21,7 +21,6 @@ export function Card({handleFlip, data}) {
 }
 
 export function InfoOnPair({handleRemovePair, flippedCard}) {
-    const link = "https://de.wikipedia.org" + flippedCard.link
     return (
         <div id="card-infobox-container" className="row d-flex justify-content-center align-items-center" onClick={handleRemovePair}>
             <div id="card-infobox" className="row w-75 h-50 bg-light p-3 rounded-2 overflow-auto">
@@ -31,7 +30,7 @@ export function InfoOnPair({handleRemovePair, flippedCard}) {
                 <div className="">
                     <h3 id="card-title">{flippedCard.title}</h3>
                     <div id="card-description">{flippedCard.summary} 
-                        <span className="ms-1"><a href={link} target="_blank" rel="noreferrer">Read more</a></span>
+                        <span className="ms-1"><a href={flippedCard.link} target="_blank" rel="noreferrer">Read more</a></span>
                     </div>
                 </div>
                 </div>
