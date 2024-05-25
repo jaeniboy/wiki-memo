@@ -20,8 +20,10 @@ for cat in d:
 
             new_article = article
             new_article["link"] = "https://de.wikipedia.org" + article["link"]
-            new_article["category"] = cat["category_title"]
-            new_article["subcategory"] = subcat["subcat_title"]
+            #new_article["category"] = cat["category_title"]
+            new_article["category"] = ""
+            #new_article["subcategory"] = subcat["subcat_title"]
+            new_article["subcategory"] = ""
 
             flat_obj.append(new_article)
 
@@ -31,5 +33,7 @@ for cat in d:
 
 #pprint.pp(flat_obj)
 
-with open('../src/wikipedia-data-flat.json', 'w', encoding='utf8') as json_file:
+#with open('../src/wikipedia-data-flat.json', 'w', encoding='utf8') as json_file:
+#with open('../src/wikipedia-data-flat-no-subcats.json', 'w', encoding='utf8') as json_file:
+with open('../src/wikipedia-data-flat-no-cats.json', 'w', encoding='utf8') as json_file:
     json.dump(flat_obj, json_file, ensure_ascii=False)

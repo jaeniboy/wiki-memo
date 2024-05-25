@@ -1,5 +1,7 @@
 import {useState, useEffect} from "react";
 //import cardData from "./full-data-good-articles.json";
+//import cardData from "./wikipedia-data-flat-no-subcats.json";
+//import cardData from "./wikipedia-data-flat-no-cats.json";
 import cardData from "./wikipedia-data-flat.json";
 import {Settings} from "./Settings.js"
 import {prepareCardDeck} from "./GamePrep.js"
@@ -127,7 +129,7 @@ function App() {
     <>
       {gamePhase === "setup" &&
         <Flexbox>
-          <Settings handleSubmit={startGame}/>      
+          <Settings handleSubmit={startGame} cardData={cardData}/>      
         </Flexbox>
       }
       {gamePhase === "pair" &&
