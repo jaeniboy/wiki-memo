@@ -2,7 +2,8 @@ import {useState, useEffect} from "react";
 //import cardData from "./full-data-good-articles.json";
 //import cardData from "./wikipedia-data-flat-no-subcats.json";
 //import cardData from "./wikipedia-data-flat-no-cats.json";
-import cardData from "./wikipedia-data-flat.json";
+//import cardData from "./wikipedia-data-flat.json";
+import cardData from "./staedel-data-flat.json";
 import {Settings} from "./Settings.js"
 import {prepareCardDeck} from "./GamePrep.js"
 import {Board, Card, InfoOnPair} from "./GameComponents.js"
@@ -15,6 +16,8 @@ import {Showall} from "./Showall.js"
 
 //To-Do:
 // write settings file
+// enable multiple categories
+// write readme.md
 
 function App() {
 
