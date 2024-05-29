@@ -6,6 +6,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  background-image: url("background.png")
 }
 
 code {
@@ -15,53 +17,59 @@ code {
 
 @media screen and (orientation:landscape) {
 
+  
+  .board {
+    --board-margin: calc(100vh * 0.10 / 2);
+    height: calc(100vh - var(--board-margin));
+    width: calc((100vh - var(--board-margin)) * 1.5);
+    max-height: calc((100vw - var(--board-margin)) * 0.666666);
+    max-width: calc(100vw - var(--board-margin));
+  }
+  
   .memo-card {
-    --margin: 4px;
-    --edge-length: calc(100vh / 4 - var(--margin));
-    --max-edge-length: calc(100vw * 0.666666 / 4 - var(--margin));
+    --cards-margin: 4px;
+    --board-margin: calc(100vh * 0.10 / 2);
+    --edge-length: calc((100vh - var(--board-margin)) / 4 - var(--cards-margin));
+    --max-edge-length: calc((100vw - var(--board-margin)) * 0.666666 / 4 - var(--cards-margin));
     width: var(--edge-length);
     height: var(--edge-length);
     max-width: var(--max-edge-length);
     max-height: var(--max-edge-length);
-    margin: calc(var(--margin) / 2);
+    margin: calc(var(--cards-margin) / 2);
     float: left;
   }
-
-  .board {
-    height: 100vh;
-    max-height: calc(100vw * 0.666666);
-    max-width: 100vw;
-    width: calc(100vh * 1.5);
-  }
-
 }
 
 @media screen and (orientation:portrait) {
 
   .memo-card {
-    --margin: 4px;
-    --edge-length: calc(100vw / 4 - var(--margin));
-    --max-edge-length: calc(100vh * 0.666666 / 4 - var(--margin));
+    --cards-margin: 4px;
+    --board-margin: calc(100vw * 0.10 / 2); 
+    --edge-length: calc((100vw - var(--board-margin)) / 4 - var(--cards-margin));
+    --max-edge-length: calc((100vh - var(--board-margin)) * 0.666666666 / 4 - var(--cards-margin));
     width: var(--edge-length);
     height: var(--edge-length);
     max-width: var(--max-edge-length);
     max-height: var(--max-edge-length);
-    margin: calc(var(--margin) / 2);
+    margin: calc(var(--cards-margin) / 2);
     float: left;
   }
 
   .board {
-    width: 100vw;
-    max-width: calc(100vh * 0.666666);
-    max-height: calc(100vw * 1.5);
+    --board-margin: calc(100vw * 0.10 /2);
+    height: calc((100vw - var(--board-margin))*1.5);
+    width: calc(100vw - var(--board-margin));
+    max-height: calc((100vh - var(--board-margin)) );
+    max-width: calc((100vh - var(--board-margin)) * 0.666666);
   }
 
+
+
 }
 
-.board {
+/* .board {
   background-color:#7BB292;
-  /* background-color: #cdcdcd; */
-}
+} */
 
 .memo-card div, .showall-card {
   height: 100%;
