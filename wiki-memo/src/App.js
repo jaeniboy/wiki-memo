@@ -3,19 +3,16 @@ import {useState, useEffect} from "react";
 //import cardData from "./wikipedia-data-flat-no-subcats.json";
 //import cardData from "./wikipedia-data-flat-no-cats.json";
 import cardData from "./wikipedia-data-flat.json";
-import {Settings} from "./Settings.js"
+import {Settings, Disclaimer} from "./Settings.js"
 import {prepareCardDeck} from "./GamePrep.js"
 import {Board, Card, InfoOnPair} from "./GameComponents.js"
 import {End} from "./End.js"
 import {Showall} from "./Showall.js"
 
-//console.log(cardData)
-
 //import cardData from "./av.json";
 
 //To-Do:
 // write settings file
-// add diclaimer
 
 function App() {
 
@@ -61,7 +58,7 @@ function App() {
       sel = cardData;
     }
 
-    cardStack = prepareCardDeck(sel, false)
+    cardStack = prepareCardDeck(sel, true)
     setCards(cardStack)
     setGamePhase("flipping")
     //setGamePhase("end")
@@ -122,7 +119,8 @@ function App() {
     <>
       {gamePhase === "setup" &&
         <Flexbox>
-          <Settings handleSubmit={startGame} cardData={cardData}/>      
+          <Settings handleSubmit={startGame} cardData={cardData}/>
+          <Disclaimer />      
         </Flexbox>
       }
       {gamePhase === "pair" &&
@@ -155,7 +153,7 @@ function App() {
 function Flexbox ({children}) {
   return (
     <div className="d-flex justify-content-center vh-100 align-items-center">
-      <div className="d-flex flex-column">
+      <div className="d-flex flex-column w-50">
       {children}
       </div>
     </div>

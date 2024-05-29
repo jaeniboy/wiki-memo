@@ -88,3 +88,12 @@ function SelectCards({cardData}) {
         </>
     )
 }
+
+export function Disclaimer() {
+    return (
+        <div>
+            <h6 style={{"textAlign":"center"}} className="mt-5">+++ Disclaimer +++</h6>
+            <p style={{"textAlign":"center", "fontSize":"0.8em"}} >Some content may appear within the game that users may find inappropriate or disturbing - such as war crimes, genocides, sexual content, etc. This is because the dataset was built from specific Wikipedia articles that were marked as "good" by the German Wikipedia community. I decided to leave all topics untouched so that each user can decide whether he or she wants to learn more about them or not. If you feel uncomfortable with these things, please do not play the game.</p>
+        </div>
+    )
+}
