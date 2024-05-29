@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/react-gh-pages/static/css/main.47c50622.css",
+    "main.js": "/react-gh-pages/static/js/main.39ffb4e9.js",
+    "static/media/background.png": "/react-gh-pages/static/media/background.6b1cba6ecc180ee58ecd.png",
+    "static/media/wikipedia-logo.svg": "/react-gh-pages/static/media/wikipedia-logo.d4e9d7452e8bcb5d746b.svg",
+    "index.html": "/react-gh-pages/index.html",
+    "main.47c50622.css.map": "/react-gh-pages/static/css/main.47c50622.css.map",
+    "main.39ffb4e9.js.map": "/react-gh-pages/static/js/main.39ffb4e9.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.47c50622.css",
+    "static/js/main.39ffb4e9.js"
+  ]
+}
