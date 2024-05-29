@@ -9,6 +9,7 @@ body {
 
   background-image: url("background.png");
   background-attachment: fixed;
+  background-size: cover;
 }
 
 code {
