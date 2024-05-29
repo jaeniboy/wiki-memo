@@ -63,13 +63,7 @@ code {
     max-width: calc((100vh - var(--board-margin)) * 0.666666);
   }
 
-
-
 }
-
-/* .board {
-  background-color:#7BB292;
-} */
 
 .memo-card div, .showall-card {
   height: 100%;

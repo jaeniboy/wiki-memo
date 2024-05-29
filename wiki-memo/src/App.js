@@ -15,7 +15,6 @@ import {Showall} from "./Showall.js"
 
 //To-Do:
 // write settings file
-// add beautiful background
 // add diclaimer
 
 function App() {
