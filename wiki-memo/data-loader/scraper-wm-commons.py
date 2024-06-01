@@ -1,6 +1,7 @@
 import json
 import requests
 from bs4 import BeautifulSoup as bs
+from tqdm import tqdm
 
 domain = "https://commons.wikimedia.org"
 
@@ -45,8 +46,8 @@ pages = [
 
 def get_commons_data(link, id, category):
     title = link.split("/")[-1]
-    api_call="https://www.mediawiki.org/w/api.php?action=query&prop=globalusage|imageinfo&gusite=dewiki&guprop=url|namespace|pageid&gunamespace=0&iiprop=user|extmetadata|url&titles=" + title + "&format=json"
-    print(api_call)
+    api_call="https://www.mediawiki.org/w/api.php?action=query&prop=globalusage|imageinfo&gusite=dewiki&guprop=url|namespace|pageid&gunamespace=0&iiprop=user|extmetadata|url&iiurlwidth=500&titles=" + title + "&format=json"
+    # print(api_call)
     json_text = requests.get(api_call).text
     data = json.loads(json_text)
     general = data["query"]["pages"]["-1"]
@@ -74,6 +75,7 @@ def get_commons_data(link, id, category):
         obj["title"] = wp_general["title"]
         obj["summary"] = wp_general["extract"]
         obj["link"] = wp_general["fullurl"]
+        obj["subcategory"] = ""
 
         return obj
 
@@ -97,9 +99,9 @@ for page in pages:
 
 all_objects = []
 obj_id = 1
-for index, link in enumerate(all_links):
-    print("------------")
-    print(str(index),"of",str(len(all_links)),"Fetching data for", link[1])
+for index, link in tqdm(enumerate(all_links)):
+    #print("------------")
+    #print(str(index),"of",str(len(all_links)),"Fetching data for", link[1])
     data_dict = get_commons_data(link[1], obj_id, link[0])
     if data_dict:
         all_objects.append(data_dict)
