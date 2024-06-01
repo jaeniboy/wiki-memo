@@ -62,7 +62,7 @@ function App() {
       sel = cardData;
     }
 
-    cardStack = prepareCardDeck(sel, true)
+    cardStack = prepareCardDeck(sel, false)
     setCards(cardStack)
     setGamePhase("flipping")
     //setGamePhase("end")

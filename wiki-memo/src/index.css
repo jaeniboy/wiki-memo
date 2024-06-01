@@ -106,6 +106,16 @@ code {
   min-height: 0px;
 }
 
+.card-image-wrapper {
+  width: 40%;
+}
+
+@media screen and (max-width: 576px) {
+  .card-image-wrapper {
+    width: 100%;
+  }
+}
+
 .hidden {
   display: none;
 }

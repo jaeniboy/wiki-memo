@@ -56,15 +56,15 @@ def get_commons_data(link, id, category):
         obj = {"id": id, "img_info_url": link, "category": category}
         wp_page_id = general["globalusage"][0]["pageid"]
         imageinfo = general["imageinfo"][0]
-        user = imageinfo["user"]
-        img_url = imageinfo["url"]
+        obj["img_artist"] = imageinfo["user"]
+        img_url = imageinfo["thumburl"]
         obj["img_url"] = img_url
-        license_short = imageinfo["extmetadata"]["LicenseShortName"]["value"]
+        obj["img_license"] = imageinfo["extmetadata"]["LicenseShortName"]["value"]
         try:
-            license_link = imageinfo["extmetadata"]["LicenseUrl"]["value"]
+            obj["img_license_link"] = imageinfo["extmetadata"]["LicenseUrl"]["value"]
         except:
-            license_link = ""
-        obj["img_credit"] = f"<span>{user} <a href='{license_link}'>{license_short}</a></span>"
+            obj["license_link"] = ""
+        # obj["img_credit"] = f"<span>{user} <a href='{license_link}'>{license_short}</a></span>"
 
         # wikipedia data call
         wp_api_call = "https://de.m.wikipedia.org/w/api.php?action=query&prop=extracts|info&inprop=url&exintro&explaintext&pageids=" + wp_page_id + "&format=json"

@@ -6,11 +6,16 @@ export function Showall({cards, handleClick}) {
     const thumbnails = cardsUnique.map((d)=>{
         return (
             <div className="row ms-3 mb-4 me-2 mh-25" style={{ "overflow":"hidden", }}>
-                <div style=
-                    {{
-                        "backgroundImage":`url("${d.img_url}")`,
-                        "width":"9em"
-                    }} className="showall-card card-front ratio ratio-1x1 p-0 m-1 ms-5 ms-sm-1 mb-4 mb-sm-1 col-sm-3">
+                <div className="col-sm-3">
+                   <a href={d.img_info_url}><div style=
+                        {{
+                            "backgroundImage":`url("${d.img_url}")`,
+                            "width":"100%",
+                            "height":"auto",
+                            "color":"black",
+                        }} className="showall-card card-front ratio ratio-1x1 p-0">
+                    </div></a>
+                    <small>Picture: User <a href="">License</a></small>
                 </div>
                 <div className="col-sm-9" style={{"maxHeight":"200px"}}>
                     

@@ -21,18 +21,26 @@ export function Card({handleFlip, data}) {
 }
 
 export function InfoOnPair({handleRemovePair, flippedCard}) {
+
     return (
         <div id="card-infobox-container" className="row d-flex justify-content-center align-items-center" onClick={handleRemovePair}>
-            <div id="card-infobox" className="row w-75 h-50 bg-light p-3 rounded-2 overflow-auto">
+            <div id="card-infobox" className="row w-75 h-75 bg-light p-3 rounded-2 overflow-auto">
                 <h1>Pair!</h1>
-                <div className="">
-                <img src={flippedCard.img_url} alt="" className="float-md-start m-3 card-image w-25"></img>
-                <div className="">
-                    <h3 id="card-title">{flippedCard.title}</h3>
-                    <div id="card-description">{flippedCard.summary} 
-                        <span className="ms-1"><a href={flippedCard.link} target="_blank" rel="noreferrer">Read more</a></span>
+                <div>
+                    <div className="card-image-wrapper me-3" style={{"float":"left"}}>
+                        {/* <a href={flippedCard.img_info_url}> */}
+                            <img src={flippedCard.img_url} alt="" className="float-md-start card-image w-100"></img>
+                        {/* </a> */}
+                        <div>
+                            <small>Picture: User <a href="de.wikipedia.org">License</a></small>
+                        </div>
                     </div>
-                </div>
+                    <div className="">
+                        <h3 id="card-title">{flippedCard.title}</h3>
+                        <div id="card-description">{flippedCard.summary} 
+                            <span className="ms-1"><a href={flippedCard.link} target="_blank" rel="noreferrer">Read more</a></span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
