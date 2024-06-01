@@ -5,7 +5,7 @@ import {useState, useEffect} from "react";
 //import cardData from "./wikipedia-data-flat.json";
 //import cardData from "./staedel-data-flat.json";
 import cardData from "./wikimedia-commons-data-flat.json"
-import {Settings} from "./Settings.js"
+import {Settings, Disclaimer} from "./Settings.js"
 import {prepareCardDeck} from "./GamePrep.js"
 import {Board, Card, InfoOnPair} from "./GameComponents.js"
 import {End} from "./End.js"
