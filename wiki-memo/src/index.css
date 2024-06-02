@@ -17,9 +17,18 @@ code {
     monospace;
 }
 
+.github-link {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+}
+
+.github-link:hover {
+  cursor: pointer;
+}
+
 @media screen and (orientation:landscape) {
 
-  
   .board {
     --board-margin: calc(100vh * 0.10 / 2);
     height: calc(100vh - var(--board-margin));
@@ -114,6 +123,10 @@ code {
   .card-image-wrapper {
     width: 100%;
   }
+
+  .end-page-img {
+    width: 25%;
+  }
 }
 
 .image-credit {
@@ -122,6 +135,22 @@ code {
 
 .show-all-text-box {
   mask-image: linear-gradient(black, 80%, transparent);
+}
+
+.end-page-img {
+  width: 100%;
+}
+
+@media screen and (min-width: 576px) {
+  .end-page-img {
+    width: 50%;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .end-page-img {
+    width: 30%;
+  }
 }
 
 .hidden {

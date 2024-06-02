@@ -46,7 +46,7 @@ export function Settings({handleSubmit,cardData}) {
             <form className="mt-4 ps-3 pe-3 ps-md-0 pe-md-0" method="post" onSubmit={handleSubmit}>
                 <SelectCards cardData={cardData} />
                 <div style={{"textAlign":"center"}}>
-                    <button type="submit" className="btn btn-primary mt-4">Start Game!</button>
+                    <button type="submit" className="btn btn-outline-light mt-4">Start Game!</button>
                 </div>
             </form>
         </>

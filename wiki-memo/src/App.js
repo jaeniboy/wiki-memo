@@ -1,4 +1,5 @@
 import {useState, useEffect} from "react";
+import { Github } from 'react-bootstrap-icons';
 //import cardData from "./full-data-good-articles.json";
 //import cardData from "./wikipedia-data-flat-no-subcats.json";
 //import cardData from "./wikipedia-data-flat-no-cats.json";
@@ -16,9 +17,9 @@ import {Showall} from "./Showall.js"
 //To-Do:
 // write settings file
 // enable multiple categories
-// disclaimer an seperate page
 // write readme.md
 // add github logo and link
+// Startpage to choose different main Stacks (Excellent and good Articles, Child Safe Version, Gemälde)
 
 function App() {
 
@@ -160,6 +161,9 @@ function App() {
           handleClick={restartGame}
         />
       }
+      <a className="github-link" href="https://github.com/jaeniboy/wiki-memo" target="_blank" rel="noreferrer" title="show code on github">
+          <Github className="" size={20} color={"whitesmoke"}/>
+      </a>
     </>
   );
 }
