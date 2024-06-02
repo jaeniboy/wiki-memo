@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/wiki-memo/static/css/main.132f95cd.css",
-    "main.js": "/wiki-memo/static/js/main.46b4d567.js",
+    "main.css": "/wiki-memo/static/css/main.4b1e0743.css",
+    "main.js": "/wiki-memo/static/js/main.a6cb6b45.js",
     "static/media/background.png": "/wiki-memo/static/media/background.6b1cba6ecc180ee58ecd.png",
     "static/media/wikipedia-logo.svg": "/wiki-memo/static/media/wikipedia-logo.d4e9d7452e8bcb5d746b.svg",
     "index.html": "/wiki-memo/index.html",
-    "main.132f95cd.css.map": "/wiki-memo/static/css/main.132f95cd.css.map",
-    "main.46b4d567.js.map": "/wiki-memo/static/js/main.46b4d567.js.map"
+    "main.4b1e0743.css.map": "/wiki-memo/static/css/main.4b1e0743.css.map",
+    "main.a6cb6b45.js.map": "/wiki-memo/static/js/main.a6cb6b45.js.map"
   },
   "entrypoints": [
-    "static/css/main.132f95cd.css",
-    "static/js/main.46b4d567.js"
+    "static/css/main.4b1e0743.css",
+    "static/js/main.a6cb6b45.js"
   ]
 }
