@@ -7,15 +7,15 @@ export function Showall({cards, handleClick}) {
         return (
             <div className="row ms-3 mb-4 me-2 mh-25" style={{ "overflow":"hidden", }}>
                 <div className="col-sm-3">
-                   <a href={d.img_info_url}><div style=
+                   <div style=
                         {{
                             "backgroundImage":`url("${d.img_url}")`,
                             "width":"100%",
                             "height":"auto",
                             "color":"black",
                         }} className="showall-card card-front ratio ratio-1x1 p-0">
-                    </div></a>
-                    <small>Picture: User <a href="">License</a></small>
+                    </div>
+                    <small className="image-credit"><a href={d.img_info_url}>Picture:</a> {d.img_artist} <a href={d.img_license_link}>{d.img_license}</a></small>
                 </div>
                 <div className="col-sm-9" style={{"maxHeight":"200px"}}>
                     

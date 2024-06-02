@@ -32,7 +32,7 @@ export function InfoOnPair({handleRemovePair, flippedCard}) {
                             <img src={flippedCard.img_url} alt="" className="float-md-start card-image w-100"></img>
                         {/* </a> */}
                         <div>
-                            <small>Picture: User <a href="de.wikipedia.org">License</a></small>
+                            <small className="image-credit"><a href={flippedCard.img_info_url}>Picture:</a> {flippedCard.img_artist} <a href={flippedCard.img_license_link}>{flippedCard.img_license}</a></small>
                         </div>
                     </div>
                     <div className="">

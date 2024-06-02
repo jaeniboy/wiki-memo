@@ -116,6 +116,10 @@ code {
   }
 }
 
+.image-credit {
+  font-size: 0.7em;
+}
+
 .hidden {
   display: none;
 }
