@@ -16,7 +16,9 @@ import {Showall} from "./Showall.js"
 //To-Do:
 // write settings file
 // enable multiple categories
+// disclaimer an seperate page
 // write readme.md
+// add github logo and link
 
 function App() {
 
@@ -62,9 +64,10 @@ function App() {
       sel = cardData;
     }
 
-    cardStack = prepareCardDeck(sel, false)
+    cardStack = prepareCardDeck(sel, true)
     setCards(cardStack)
-    setGamePhase("flipping")
+    setGamePhase("disclaimer")
+    //setGamePhase("flipping")
     //setGamePhase("end")
   }
 
@@ -123,9 +126,16 @@ function App() {
     <>
       {gamePhase === "setup" &&
         <Flexbox>
-          <Settings handleSubmit={startGame} cardData={cardData}/>
-          <Disclaimer />      
+          <Settings handleSubmit={startGame} cardData={cardData}/>    
         </Flexbox>
+      }
+      {gamePhase === "disclaimer" &&
+      <Flexbox>
+        <Disclaimer 
+          handleAccept={()=>setGamePhase("flipping")}
+          handleQuit={()=>setGamePhase("setup")}
+        />
+      </Flexbox>
       }
       {gamePhase === "pair" &&
         <InfoOnPair handleRemovePair={()=>removePair()} flippedCard={cardsFlipped[0]}/>      

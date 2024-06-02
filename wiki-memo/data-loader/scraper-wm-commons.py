@@ -47,7 +47,6 @@ pages = [
 def get_commons_data(link, id, category):
     title = link.split("/")[-1]
     api_call="https://www.mediawiki.org/w/api.php?action=query&prop=globalusage|imageinfo&gusite=dewiki&guprop=url|namespace|pageid&gunamespace=0&iiprop=user|extmetadata|url&iiurlwidth=500&titles=" + title + "&format=json"
-    # print(api_call)
     json_text = requests.get(api_call).text
     data = json.loads(json_text)
     general = data["query"]["pages"]["-1"]
@@ -64,11 +63,9 @@ def get_commons_data(link, id, category):
             obj["img_license_link"] = imageinfo["extmetadata"]["LicenseUrl"]["value"]
         except:
             obj["license_link"] = ""
-        # obj["img_credit"] = f"<span>{user} <a href='{license_link}'>{license_short}</a></span>"
 
         # wikipedia data call
         wp_api_call = "https://de.m.wikipedia.org/w/api.php?action=query&prop=extracts|info&inprop=url&exintro&explaintext&pageids=" + wp_page_id + "&format=json"
-        # print(wp_api_call)
         wp_json_text = requests.get(wp_api_call).text
         wp_data = json.loads(wp_json_text)
         wp_general = wp_data["query"]["pages"].popitem()[1]
@@ -78,8 +75,6 @@ def get_commons_data(link, id, category):
         obj["subcategory"] = ""
 
         return obj
-
-
 
 # def get_wikipedia_data(link):
     # Titel des Artikels
