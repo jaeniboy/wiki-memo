@@ -120,6 +120,10 @@ code {
   font-size: 0.7em;
 }
 
+.show-all-text-box {
+  mask-image: linear-gradient(black, 80%, transparent);
+}
+
 .hidden {
   display: none;
 }

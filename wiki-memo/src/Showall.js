@@ -20,7 +20,7 @@ export function Showall({cards, handleClick}) {
                 <div className="col-sm-9" style={{"maxHeight":"200px"}}>
                     
                     <h4>{d.title} <a href={d.link} target="_blank"  rel="noreferrer"><BoxArrowUpRight className="mb-1 ms-2" size={16} /></a></h4>
-                    <div className="" style={{}}>{d.summary}</div>
+                    <div className="show-all-text-box" style={{"height":"100%", "overflow":"hidden"}}>{d.summary}</div>
                 </div>
             </div>
         )
