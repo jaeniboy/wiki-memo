@@ -33,15 +33,15 @@ code {
     --board-margin: calc(100vh * 0.10 / 2);
     height: calc(100vh - var(--board-margin));
     width: calc((100vh - var(--board-margin)) * 1.5);
-    max-height: calc((100vw - var(--board-margin)) * 0.666666);
-    max-width: calc(100vw - var(--board-margin));
+    max-height: calc((100vw - var(--board-margin)) * (2/3));
+    max-width: calc(100vw - var(--board-margin) + 1px);
   }
   
   .memo-card {
     --cards-margin: 4px;
     --board-margin: calc(100vh * 0.10 / 2);
     --edge-length: calc((100vh - var(--board-margin)) / 4 - var(--cards-margin));
-    --max-edge-length: calc((100vw - var(--board-margin)) * 0.666666 / 4 - var(--cards-margin));
+    --max-edge-length: calc((100vw - var(--board-margin)) * (2/3) / 4 - var(--cards-margin));
     width: var(--edge-length);
     height: var(--edge-length);
     max-width: var(--max-edge-length);
@@ -57,7 +57,7 @@ code {
     --cards-margin: 4px;
     --board-margin: calc(100vw * 0.10 / 2); 
     --edge-length: calc((100vw - var(--board-margin)) / 4 - var(--cards-margin));
-    --max-edge-length: calc((100vh - var(--board-margin)) * 0.666666666 / 4 - var(--cards-margin));
+    --max-edge-length: calc((100vh - var(--board-margin)) * (2/3) / 4 - var(--cards-margin));
     width: var(--edge-length);
     height: var(--edge-length);
     max-width: var(--max-edge-length);
@@ -71,7 +71,7 @@ code {
     height: calc((100vw - var(--board-margin))*1.5);
     width: calc(100vw - var(--board-margin));
     max-height: calc((100vh - var(--board-margin)) );
-    max-width: calc((100vh - var(--board-margin)) * 0.666666);
+    max-width: calc((100vh - var(--board-margin)) * (2/3) + 1px);
   }
 
 }
