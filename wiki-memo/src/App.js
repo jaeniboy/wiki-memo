@@ -5,7 +5,8 @@ import { Github } from 'react-bootstrap-icons';
 //import cardData from "./wikipedia-data-flat-no-cats.json";
 //import cardData from "./wikipedia-data-flat.json";
 //import cardData from "./staedel-data-flat.json";
-import cardData from "./wikimedia-commons-data-flat.json"
+// import cardData from "./wikimedia-commons-data-flat.json"
+import cardData from "./wikipedia-paintings-flat.json"
 import {Settings, Disclaimer} from "./Settings.js"
 import {prepareCardDeck} from "./GamePrep.js"
 import {Board, Card, InfoOnPair} from "./GameComponents.js"
