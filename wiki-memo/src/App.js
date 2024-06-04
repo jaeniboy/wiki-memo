@@ -1,4 +1,4 @@
-import {useState, useEffect} from "react";
+import {useState} from "react";
 import { Github } from 'react-bootstrap-icons';
 //import cardData from "./full-data-good-articles.json";
 //import cardData from "./wikipedia-data-flat-no-subcats.json";
@@ -7,7 +7,7 @@ import { Github } from 'react-bootstrap-icons';
 //import cardData from "./staedel-data-flat.json";
 // import cardData from "./wikimedia-commons-data-flat.json"
 import cardData from "./wikipedia-paintings-flat.json"
-import {Settings, Disclaimer} from "./Settings.js"
+import {Settings, Disclaimer} from "./GameSettings.js"
 import {prepareCardDeck} from "./GamePrep.js"
 import {Board, Card, InfoOnPair} from "./GameComponents.js"
 import {End} from "./End.js"
@@ -19,7 +19,6 @@ import {Showall} from "./Showall.js"
 // write settings file
 // enable multiple categories
 // write readme.md
-// add github logo and link
 // Startpage to choose different main Stacks (Excellent and good Articles, Child Safe Version, Gemälde)
 
 function App() {
@@ -33,16 +32,16 @@ function App() {
   const [gamePhase, setGamePhase] = useState("setup") // setup, flipping, pair, end, showall
   const [numMoves, setNumMoves] = useState(0)
 
-  useEffect(() => {
-    const unloadCallback = (event) => {
-      event.preventDefault();
-      event.returnValue = "";
-      return "";
-    };
+  // useEffect(() => {
+  //   const unloadCallback = (event) => {
+  //     event.preventDefault();
+  //     event.returnValue = "";
+  //     return "";
+  //   };
   
-    window.addEventListener("beforeunload", unloadCallback);
-    return () => window.removeEventListener("beforeunload", unloadCallback);
-  }, []);
+  //   window.addEventListener("beforeunload", unloadCallback);
+  //   return () => window.removeEventListener("beforeunload", unloadCallback);
+  // }, []);
 
   // preload images
   for (const image of images) {
