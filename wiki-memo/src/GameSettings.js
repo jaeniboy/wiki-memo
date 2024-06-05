@@ -1,6 +1,3 @@
-//import cardData from "./full-data-good-articles.json";
-//import cardData from "./wikipedia-data-flat.json";
-
 
 function createOptions(arr) {
 
@@ -89,11 +86,11 @@ function SelectCards({cardData}) {
     )
 }
 
-export function Disclaimer({handleAccept, handleQuit}) {
+export function Disclaimer({handleAccept, handleQuit, text}) {
     return (
         <div>
             <h3 style={{"textAlign":"center"}} className="mt-5">+++ Disclaimer +++</h3>
-            <p style={{"textAlign":"center"}} >Some content may appear within the game that users may find inappropriate or disturbing - such as war crimes, genocides, sexual content, etc. This is because the dataset was built from specific Wikipedia articles that were marked as "good" by the German Wikipedia community. I decided to leave all topics untouched so that each user can decide whether he or she wants to learn more about them or not. If you feel uncomfortable with these things, please do not play the game.</p>
+            <p style={{"textAlign":"center"}}>{text}</p>
             <div style={{"textAlign":"center"}}>
                 <button className="btn btn-outline-light btn-sm" onClick={handleAccept}>That's ok!</button><button onClick={handleQuit} className="btn btn-sm btn-outline-light ms-2">No, better not</button>
             </div>
