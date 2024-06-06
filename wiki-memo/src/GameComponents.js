@@ -24,7 +24,7 @@ export function InfoOnPair({handleRemovePair, flippedCard}) {
 
     return (
         <div id="card-infobox-container" className="row d-flex justify-content-center align-items-center" onClick={handleRemovePair}>
-            <div id="card-infobox" className="row w-75 h-75 bg-light p-3 rounded-2 overflow-auto">
+            <div id="card-infobox" className="row bg-light p-3 rounded-2 overflow-auto">
                 <h1>Pair!</h1>
                 <div>
                     <div className="card-image-wrapper me-3" style={{"float":"left"}}>

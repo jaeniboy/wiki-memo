@@ -164,6 +164,25 @@ code {
   z-index: 99;
 }
 
+#card-infobox {
+  width: 90%;
+  height: 85%;
+}
+
+@media screen and (min-width: 576px) {
+  #card-infobox {
+    width: 80%;
+    height: 75%;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  #card-infobox {
+    width: 70%;
+    height: 70%;
+  }
+}
+
 .card-infobox-content {
   flex: 1 1 auto;
   overflow-y: auto;
