@@ -143,9 +143,11 @@ code {
 
 .card-back {
   background-color:aliceblue;
-  background-image: url("./wikipedia-logo.svg");
-  background-size: 90%;
-  background-repeat: no-repeat;
+  background-image: url("./pattern.svg");
+  background-size: 15%;
+  /* background-image: url("./wikipedia-logo.svg"); */
+  /* background-size: 90%;
+  background-repeat: no-repeat; */
 }
 
 .card-hidden {
