@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import { Github } from 'react-bootstrap-icons';
 //import cardData from "./full-data-good-articles.json";
 //import cardData from "./wikipedia-data-flat-no-subcats.json";
@@ -42,7 +42,7 @@ const previewData = [
       "description":'Artikel aus der Kategorie "Gemälde" vom 15. bis zum 19. Jahrhundert',
       "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Goethe_in_the_Roman_Campagna_%28SM_1157%29.png/1024px-Goethe_in_the_Roman_Campagna_%28SM_1157%29.png",
       "mainStack" : paintings,
-      "disclaimer":"Vorsicht, hier sind Nackideis dabei"
+      "disclaimer":"Vorsicht, hier können auch mal Nackideis dabei sein"
   }
 ]
 
@@ -57,6 +57,17 @@ function App() {
   const images = cards.map(d=>d.img_url)
   const [gamePhase, setGamePhase] = useState("preview") // preview, setup, flipping, pair, end, showall
   const [numMoves, setNumMoves] = useState(0)
+
+  useEffect(() => {  
+    const unloadCallback = (event) => {
+      event.preventDefault();
+      event.returnValue = "";
+      return "";
+    }; 
+    window.addEventListener("beforeunload", unloadCallback);
+    return () => window.removeEventListener("beforeunload", unloadCallback);
+  }, []);
+
 
   // preload images
   for (const image of images) {

@@ -62,7 +62,7 @@ def get_commons_data(link, id, category):
         try:
             obj["img_license_link"] = imageinfo["extmetadata"]["LicenseUrl"]["value"]
         except:
-            obj["license_link"] = ""
+            obj["img_license_link"] = ""
 
         # wikipedia data call
         wp_api_call = "https://de.m.wikipedia.org/w/api.php?action=query&prop=extracts|info&inprop=url&exintro&explaintext&pageids=" + wp_page_id + "&format=json"
