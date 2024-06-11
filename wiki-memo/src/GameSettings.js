@@ -1,39 +1,4 @@
-
-// function createOptions2(arr) {
-
-//     // create nested object
-//     const obj = []
-//     const allCats = [arr[0].category]
-//     let allSubcats = []
-//     for (const [i,elem] of arr.entries()) {
-//         if (!allCats.includes(elem.category) || i === arr.length-1) {
-//             obj.push({
-//                 "category":allCats.slice(-1)[0],
-//                 "subcategories": allSubcats,
-//             })
-//             allCats.push(elem.category)
-//             allSubcats = []
-//             allSubcats.push(elem.subcategory)
-//         } else {
-//             if (!allSubcats.includes(elem.subcategory)) {
-//                 allSubcats.push(elem.subcategory)
-//             }
-//         }
-//     }
-
-//     // add num of articles
-//     const newObj = obj.map(d=>{
-//         const cat_len = arr.filter(e=>e.category === d.category).length
-//         const subcats = d.subcategories.map(f=>{
-//             const subcat_len = arr.filter(g=>g.subcategory===f).length
-//             return {"subcategory":f, "articles":subcat_len}
-//         })
-//         return {...d,"articles":cat_len, "subcategories":subcats}
-//     }) 
-
-//     return newObj
-
-// }
+import { ArrowLeft } from 'react-bootstrap-icons';
 
 function compare( a, b ) {
     if ( a.category_count < b.category_count ){
@@ -73,15 +38,18 @@ function createOptions(arr) {
     return arrayOfObjects.sort(compare)
 }
 
-export function Settings({handleSubmit,cardData}) {
+export function Settings({handleSubmit,cardData, handleBacklink}) {
 
     return (
         <>
-            <h1 style={{"textAlign":"center"}}>Choose your Cardstack ...</h1>
+            <h1 style={{"textAlign":"center"}}>Choose your substack ...</h1>
             <form className="mt-4 ps-3 pe-3 ps-md-0 pe-md-0" method="post" onSubmit={handleSubmit}>
                 <SelectCards cardData={cardData} />
                 <div style={{"textAlign":"center"}}>
                     <button type="submit" className="btn btn-outline-light mt-4">Start Game!</button>
+                </div>
+                <div style={{"textAlign":"center"}} className="mt-4">
+                    <span onClick={handleBacklink} className="link-light" role="button"><ArrowLeft /> Back to Preview Page</span>
                 </div>
             </form>
         </>

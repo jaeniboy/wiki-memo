@@ -1,19 +1,12 @@
 import {useState, useEffect} from "react";
 import { Github } from 'react-bootstrap-icons';
-//import cardData from "./full-data-good-articles.json";
-//import cardData from "./wikipedia-data-flat-no-subcats.json";
-//import cardData from "./wikipedia-data-flat-no-cats.json";
-//import cardData from "./staedel-data-flat.json";
-// import goodArticles from "./wikipedia-data-flat.json";
-import goodArticles from "./excellent-articles-flat.json";
-import pictures from "./wikimedia-commons-data-flat.json";
-import paintings from "./wikipedia-paintings-flat.json";
+import {previewData} from "./GameCardStacks.js";
 import { ShowPreview } from "./GamePreview.js";
 import {Settings, Disclaimer} from "./GameSettings.js";
 import {prepareCardDeck} from "./GamePrep.js";
 import {Board, Card, InfoOnPair} from "./GameComponents.js";
-import {End} from "./End.js";
-import {Showall} from "./Showall.js";
+import {End} from "./GameEnd.js";
+import {Showall} from "./GameShowAll.js";
 
 //import cardData from "./av.json";
 
@@ -21,31 +14,6 @@ import {Showall} from "./Showall.js";
 // write settings file
 // enable multiple categories
 // write readme.md
-// back to card stack preview button
-
-const previewData = [
-  {
-      "title":"Lesenswerte Artikel",
-      "description":'Artikel, die im April 2024 in der deutschsprachigen Wikipedia als "lesenswert" markiert waren',
-      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Canal_Grande_Chiesa_della_Salute_e_Dogana_dal_ponte_dell_Accademia.jpg/1280px-Canal_Grande_Chiesa_della_Salute_e_Dogana_dal_ponte_dell_Accademia.jpg",
-      "mainStack" : goodArticles,
-      "disclaimer":'Some content may appear within the game that users may find inappropriate or disturbing - such as war crimes, genocides, sexual content, etc. This is because the dataset was built from specific Wikipedia articles that were marked as "good" by the German Wikipedia community. I decided to leave all topics untouched so that each user can decide whether he or she wants to learn more about them or not. If you feel uncomfortable with these things, please do not play the game.'
-  },
-  {
-      "title":"Exzellente Bilder",
-      "description":'Eine Auswahl besonders hochwertiger Bilder auf Wikimedia Commons (child safe)',
-      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Eisvogel_kingfisher.jpg/640px-Eisvogel_kingfisher.jpg",
-      "mainStack" : pictures,
-      "disclaimer":""
-  },
-  {
-      "title":"Gemälde aus fünf Jahrhunderten",
-      "description":'Artikel aus der Kategorie "Gemälde" vom 15. bis zum 19. Jahrhundert',
-      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Goethe_in_the_Roman_Campagna_%28SM_1157%29.png/1024px-Goethe_in_the_Roman_Campagna_%28SM_1157%29.png",
-      "mainStack" : paintings,
-      "disclaimer":"Vorsicht, hier können auch mal Nackideis dabei sein"
-  }
-]
 
 function App() {
 
@@ -171,7 +139,11 @@ function App() {
       }
       {gamePhase === "setup" &&
         <Flexbox>
-          <Settings handleSubmit={startGame} cardData={mainStack.mainStack}/>    
+          <Settings 
+            handleSubmit={startGame} 
+            cardData={mainStack.mainStack} 
+            handleBacklink={()=>setGamePhase("preview")}
+          />    
         </Flexbox>
       }
       {gamePhase === "disclaimer" &&

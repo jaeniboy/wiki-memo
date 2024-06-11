@@ -2,3 +2,4 @@ notes.txt
 wiki-memo/src/av.json
 wiki-memo/data-loader/scraper-rym.py
 wiki-memo/data-loader/scraper-staedel.py
+*.bak

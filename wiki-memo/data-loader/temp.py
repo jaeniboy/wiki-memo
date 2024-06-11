@@ -5,8 +5,9 @@ with open('../src/wikimedia-commons-data-flat.json', encoding='utf-8') as f:
 
 
 for item in d:
-    item["subcategory"] = ""
+    # item["subcategory"] = ""
+    item["category"] = [item["category"]]
 
 
-with open('../src/wikimedia-commons-data-flat.json', 'w', encoding='utf8') as json_file:
+with open('../src/wikimedia-commons-data-flat-2.json', 'w', encoding='utf8') as json_file:
     json.dump(d, json_file, ensure_ascii=False)

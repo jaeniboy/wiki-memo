@@ -52,7 +52,7 @@ def get_commons_data(link, id, category):
     general = data["query"]["pages"]["-1"]
     # check if img is used in german wikipedia article
     if len(general["globalusage"]) > 0:
-        obj = {"id": id, "img_info_url": link, "category": category}
+        obj = {"id": id, "img_info_url": link, "category": [category]}
         wp_page_id = general["globalusage"][0]["pageid"]
         imageinfo = general["imageinfo"][0]
         obj["img_artist"] = imageinfo["user"]
@@ -72,14 +72,9 @@ def get_commons_data(link, id, category):
         obj["title"] = wp_general["title"]
         obj["summary"] = wp_general["extract"]
         obj["link"] = wp_general["fullurl"]
-        obj["subcategory"] = ""
+        # obj["subcategory"] = ""
 
         return obj
-
-# def get_wikipedia_data(link):
-    # Titel des Artikels
-
-    # Kurzbeschreibung des Artikels
 
 all_links = []
 
@@ -94,16 +89,19 @@ for page in pages:
 
 all_objects = []
 obj_id = 1
-for index, link in tqdm(enumerate(all_links)):
+for index, link in tqdm(enumerate(all_links[4350:4400])):
     #print("------------")
     #print(str(index),"of",str(len(all_links)),"Fetching data for", link[1])
-    data_dict = get_commons_data(link[1], obj_id, link[0])
-    if data_dict:
+    try:
+        data_dict = get_commons_data(link[1], obj_id, link[0])
         all_objects.append(data_dict)
         obj_id += 1
+    except:
+        pass
+    # if data_dict:
 
 #print(json.dumps(all_objects, indent=4))
 
-with open('../src/wikimedia-commons-data-flat.json', 'w', encoding='utf8') as json_file:
+with open('../src/wikimedia-commons-data-flat-2.json', 'w', encoding='utf8') as json_file:
     json.dump(all_objects, json_file, ensure_ascii=False)
 
