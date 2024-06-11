@@ -25,14 +25,15 @@ unwanted_categories = [
 # seperate headlines from content tables
 for table in more_tables[2:]:
     if table.find("h3") != None:
-        h3 = table.find("h3").find("span").getText()
+        h3 = table.find("h3").getText()
         categories.append(h3)
     else:
         category_tables.append(table)
 
+object_id = 1
 for index, category in enumerate(categories):
     # print("----")
-    # print(category)
+    print(category)
     subcategories = category_tables[index].find_all("p")
     for subcategory in subcategories:
         subcat_name = subcategory.find("b").getText()[:-1].strip()
@@ -40,12 +41,13 @@ for index, category in enumerate(categories):
         # print("--", subcat_name)
         for link in subcat_links:
             if "/Datei:" not in link:
-                article_object = {"link":link}
+                article_object = {"id": object_id, "link":link}
                 if len(subcat_links) < 12 or subcat_name in unwanted_categories:
                     article_object["category"] = [category]
                 else:
                     article_object["category"] = [category, subcat_name]
                 article_objects.append(article_object)
+                object_id += 1
 
 def chunks(lst, n):
     """Yield successive n-sized chunks from lst."""
@@ -108,6 +110,7 @@ for i,chunk in enumerate(chunks):
     }
 
     iq_result = requests.get("https://www.mediawiki.org/w/api.php?", iq_params)
+    # print(iq_result.url)
     iq_data = iq_result.json()
     iq_pages = iq_data["query"]["pages"]
 
@@ -118,6 +121,7 @@ for i,chunk in enumerate(chunks):
                 #print(article["pageimage"])
                 try:
                     article["img_artist"] = iq_pages[page]["imageinfo"][0]["user"]
+                    article["img_info_url"] = iq_pages[page]["imageinfo"][0]["descriptionurl"]
                     article["img_url"] = iq_pages[page]["imageinfo"][0]["thumburl"]
                     article["img_license"] = iq_pages[page]["imageinfo"][0]["extmetadata"]["LicenseShortName"]["value"]
                     try:

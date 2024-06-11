@@ -41,7 +41,7 @@ function createDummyImg(title,color) {
     return canvas.toDataURL()
 }
 
-console.log(createDummyImg("w -eg","#FFCCCC"))
+// console.log(createDummyImg("w -eg","#FFCCCC"))
   
 function insertDummyImages(arr) {
     //const colors = ["#FFCCCC","#FFE5CC","#FFFFCC","#E5FFCC","#CCFFCC","#CCFFE5","#CCFFFF","#CCE5FF","#CCCCFF","#E5CCFF","#FFCCE5"]

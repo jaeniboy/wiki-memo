@@ -50,7 +50,7 @@ def chunks(lst, n):
     for i in range(0, len(lst), n):
         yield lst[i:i + n]
 
-chunks = list(chunks(pages, 50))
+chunks = list(chunks(pages, 20))
 # print(chunks[0])
 #page_ids = [str(page["pageid"]) for page in chunks[0]]
 # print(page_ids)
@@ -84,13 +84,13 @@ for index, chunk in enumerate(chunks):
             o = {
                 "id": page["pageid"],
                 "title": page["title"],
-                "category": page["category"],
+                "category": [page["category"]],
                 "subcategory": "",
                 "summary": data[page_id]["extract"],
                 "img_info_url": "https://commons.wikimedia.org/wiki/File:" + data[page_id]["pageimage"],
                 "img_artist":"",
                 "img_url": data[page_id]["thumbnail"]["source"],
-                "img_license": "",
+                "img_license": "Public Domain",
                 "img_license_link": "",
                 "link": data[page_id]["fullurl"]
             }

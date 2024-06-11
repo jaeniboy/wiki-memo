@@ -4,7 +4,8 @@ import { Github } from 'react-bootstrap-icons';
 //import cardData from "./wikipedia-data-flat-no-subcats.json";
 //import cardData from "./wikipedia-data-flat-no-cats.json";
 //import cardData from "./staedel-data-flat.json";
-import goodArticles from "./wikipedia-data-flat.json";
+// import goodArticles from "./wikipedia-data-flat.json";
+import goodArticles from "./excellent-articles-flat.json";
 import pictures from "./wikimedia-commons-data-flat.json";
 import paintings from "./wikipedia-paintings-flat.json";
 import { ShowPreview } from "./GamePreview.js";
@@ -20,7 +21,7 @@ import {Showall} from "./Showall.js";
 // write settings file
 // enable multiple categories
 // write readme.md
-// Startpage to choose different main Stacks (Excellent and good Articles, Child Safe Version, Gemälde)
+// back to card stack preview button
 
 const previewData = [
   {
@@ -68,7 +69,6 @@ function App() {
     return () => window.removeEventListener("beforeunload", unloadCallback);
   }, []);
 
-
   // preload images
   for (const image of images) {
     const imageElement = new Image();
@@ -76,22 +76,28 @@ function App() {
   }
 
   const startGame = (e) => {
-    // create card stack base on user input
+    // create card stack based on user input
     e.preventDefault()
     let sel = []
     const value = e.target[0].value
 
-    if (value.includes("subcat-")) {
-      const subcatName = value.match(/subcat-(.*)/)[1]
-      sel = mainStack.mainStack.filter(d=>d.subcategory===subcatName)
-    } else if (value.includes("cat-")) {
-      const catName = value.match(/cat-(.*)/)[1]
-      sel = mainStack.mainStack.filter(d=>d.category===catName)
-    } else {
+    if (value === "all-cards") {
       sel = mainStack.mainStack;
+    } else {
+      sel = mainStack.mainStack.filter(d=>d.category.includes(value))
     }
 
-    cardStack = prepareCardDeck(sel, true)
+    // if (value.includes("subcat-")) {
+    //   const subcatName = value.match(/subcat-(.*)/)[1]
+    //   sel = mainStack.mainStack.filter(d=>d.subcategory===subcatName)
+    // } else if (value.includes("cat-")) {
+    //   const catName = value.match(/cat-(.*)/)[1]
+    //   sel = mainStack.mainStack.filter(d=>d.category===catName)
+    // } else {
+    //   sel = mainStack.mainStack;
+    // }
+
+    cardStack = prepareCardDeck(sel, false)
     setCards(cardStack)
     mainStack.disclaimer !== "" ? setGamePhase("disclaimer") : setGamePhase("flipping")
     //setGamePhase("flipping")
@@ -138,6 +144,7 @@ function App() {
   }
 
   const restartGame = () =>{
+    setNumMoves(0)
     setGamePhase("setup")
   }
 
@@ -148,6 +155,8 @@ function App() {
       handleFlip={()=> numCardsFlipped!==2 && flipCard(d.id)}
       />
   })
+
+  console.log(cardItems)
 
   return (
     <>
