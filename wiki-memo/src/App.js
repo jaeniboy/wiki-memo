@@ -65,7 +65,7 @@ function App() {
     //   sel = mainStack.mainStack;
     // }
 
-    cardStack = prepareCardDeck(sel, false)
+    cardStack = prepareCardDeck(sel, true)
     setCards(cardStack)
     mainStack.disclaimer !== "" ? setGamePhase("disclaimer") : setGamePhase("flipping")
     //setGamePhase("flipping")
