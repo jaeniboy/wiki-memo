@@ -40,15 +40,12 @@ function createDummyImg(title,color) {
     
     return canvas.toDataURL()
 }
-
-// console.log(createDummyImg("w -eg","#FFCCCC"))
   
 function insertDummyImages(arr) {
     //const colors = ["#FFCCCC","#FFE5CC","#FFFFCC","#E5FFCC","#CCFFCC","#CCFFE5","#CCFFFF","#CCE5FF","#CCCCFF","#E5CCFF","#FFCCE5"]
     const colors = ["#000000","#00008B","#A52A2A","#D2691E","#006400","#8B008B","#2F4F4F","#FFD700","#4B0082","#C71585","#4682B4","#9ACD32"]
     let i = 0
     const newArray = arr.map((d)=> {
-      console.log(d)
       if (!d.img_url || d.img_url === "") {
         let url = createDummyImg(d.title,colors[i])
         i++

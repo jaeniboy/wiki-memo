@@ -7,12 +7,12 @@ import {prepareCardDeck} from "./GamePrep.js";
 import {Board, Card, InfoOnPair} from "./GameComponents.js";
 import {End} from "./GameEnd.js";
 import {Showall} from "./GameShowAll.js";
+import SmartCrop from "smartcrop";
 
 //import cardData from "./av.json";
 
 //To-Do:
-// write settings file
-// enable multiple categories
+// ship image cropping to gameprep.js
 // write readme.md
 
 function App() {
@@ -102,7 +102,6 @@ function App() {
       }
     })
     setCards(pairRemoved)
-    console.log("Lenght: "+remainingCards)
 
     if (remainingCards === 2) {
       setGamePhase("end")
@@ -123,8 +122,6 @@ function App() {
       handleFlip={()=> numCardsFlipped!==2 && flipCard(d.id)}
       />
   })
-
-  console.log(cardItems)
 
   return (
     <>

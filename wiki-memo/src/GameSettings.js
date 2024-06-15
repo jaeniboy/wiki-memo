@@ -16,13 +16,11 @@ function createOptions(arr) {
     for (const obj of arr) {
         allCategories = allCategories.concat(obj.category)
     }
-    console.log(allCategories)
     // count all occurancies
     let categoryCounts = {}
     for (const category of allCategories) {
         categoryCounts[category] = categoryCounts[category] ? categoryCounts[category] + 1 : 1;
     }
-    console.log(categoryCounts)
     // build sorted array
     let arrayOfObjects = []
     for (const key of Object.keys(categoryCounts)) {
@@ -33,8 +31,6 @@ function createOptions(arr) {
             }
         )
     }
-
-    console.log(arrayOfObjects.sort(compare))
     return arrayOfObjects.sort(compare)
 }
 
