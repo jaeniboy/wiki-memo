@@ -13,7 +13,9 @@ export function Board({children}) {
 export function Card({handleFlip, data}) {
     return (
         <div className={"memo-card "  + (data.onBoard === false ? "card-hidden" : null)} onClick={handleFlip}>
-            <div style={{backgroundImage: `url("${data.img_url}")`}} className={"card-front " + (data.position !== "faceUp" && "hidden")}>
+            <div style={{
+                backgroundImage: `url("${data.imageCropped}")`,
+                }} className={"card-front " + (data.position !== "faceUp" && "hidden")}>
             </div>
             <div className={"card-back " + (data.position === "faceUp" && "hidden")}></div>
         </div>

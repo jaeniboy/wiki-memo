@@ -7,7 +7,6 @@ import {prepareCardDeck} from "./GamePrep.js";
 import {Board, Card, InfoOnPair} from "./GameComponents.js";
 import {End} from "./GameEnd.js";
 import {Showall} from "./GameShowAll.js";
-import SmartCrop from "smartcrop";
 
 //import cardData from "./av.json";
 
@@ -43,7 +42,7 @@ function App() {
     imageElement.src = image;
   }
 
-  const startGame = (e) => {
+  const startGame = async (e) => {
     // create card stack based on user input
     e.preventDefault()
     let sel = []
@@ -55,17 +54,7 @@ function App() {
       sel = mainStack.mainStack.filter(d=>d.category.includes(value))
     }
 
-    // if (value.includes("subcat-")) {
-    //   const subcatName = value.match(/subcat-(.*)/)[1]
-    //   sel = mainStack.mainStack.filter(d=>d.subcategory===subcatName)
-    // } else if (value.includes("cat-")) {
-    //   const catName = value.match(/cat-(.*)/)[1]
-    //   sel = mainStack.mainStack.filter(d=>d.category===catName)
-    // } else {
-    //   sel = mainStack.mainStack;
-    // }
-
-    cardStack = prepareCardDeck(sel, true)
+    cardStack = await prepareCardDeck(sel, true)
     setCards(cardStack)
     mainStack.disclaimer !== "" ? setGamePhase("disclaimer") : setGamePhase("flipping")
     //setGamePhase("flipping")

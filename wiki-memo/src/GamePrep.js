@@ -1,3 +1,5 @@
+import SmartCrop from "smartcrop";
+
 function getRandIndex(arr) {
     return Math.floor(Math.random() * arr.length)
   }
@@ -58,6 +60,31 @@ function insertDummyImages(arr) {
     })
     return newArray
 }
+
+async function smartcropImages(arr) {
+  
+  const croppedImages = Promise.all(arr.map(async d => {
+    const imageElement = new Image();
+    imageElement.crossOrigin = "Anonymous";
+    imageElement.src = d.img_url
+    await imageElement.decode()
+    const minSize = Math.min([imageElement.height, imageElement.width])
+    const canvas = document.createElement("canvas")
+    const context = canvas.getContext('2d');
+    const crop = await SmartCrop.crop(imageElement,{width: minSize, height: minSize})//.topCrop
+    const topCrop = crop.topCrop
+    canvas.width = topCrop.width
+    canvas.height = topCrop.height
+    context.drawImage(imageElement, topCrop.x, topCrop.y, topCrop.width, topCrop.height, 0, 0, canvas.width, canvas.height);
+    
+    // return cropValue
+    return {
+      ...d,
+      imageCropped: canvas.toDataURL(),
+    }
+  }))
+  return croppedImages
+}
   
 function duplicateCardStack(arr) {
     // duplicate card stack an establish pair reference
@@ -77,10 +104,11 @@ function shuffleCardStack(array) { //https://stackoverflow.com/questions/2450954
     return array
 }
 
-export function prepareCardDeck(array,shuffled=true) {
+export async function prepareCardDeck(array,shuffled=true) {
     const randomCards = drawRandomCards(array)
     const cardsWithDummys = insertDummyImages(randomCards)
-    const duplicatedCards = duplicateCardStack(cardsWithDummys)
+    const cropedImages = await smartcropImages(cardsWithDummys)
+    const duplicatedCards = duplicateCardStack(cropedImages)
     if (shuffled) {
         return shuffleCardStack(duplicatedCards)
     } else {
